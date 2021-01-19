@@ -3094,68 +3094,87 @@ ID,age,value
 4.1.4,Felső tagozat,178.0
 4.1.5,Alsó tagozat,86.0
 4.1.5,Felső tagozat,101.0
+4.1.5,Óvoda,21.0
 4.1.6,Alsó tagozat,201.0
 4.1.6,Felső tagozat,218.0
+4.1.6,Óvoda,42.0
 4.1.7,Alsó tagozat,14.0
 4.1.7,Felső tagozat,25.0
-4.1.8,Alsó tagozat,279.0
-4.1.8,Felső tagozat,348.0
-4.1.9,Alsó tagozat,117.0
-4.1.9,Felső tagozat,92.0
-4.2.0,Alsó tagozat,6.0
-4.2.0,Felső tagozat,6.0
-4.2.1,Alsó tagozat,33.0
-4.2.1,Felső tagozat,37.0
-4.2.2,Alsó tagozat,3.0
-4.2.2,Felső tagozat,0.0
-4.2.3,Alsó tagozat,11.0
-4.2.3,Felső tagozat,6.0
+4.1.8,Óvoda,4.0
+4.1.9,Alsó tagozat,279.0
+4.1.9,Felső tagozat,348.0
+4.1.9,Óvoda,524.0
+4.1.10,Alsó tagozat,117.0
+4.1.10,Felső tagozat,92.0
+4.1.10,Óvoda,52.0
+4.2.0,Óvoda,16.0
+4.2.1,Alsó tagozat,6.0
+4.2.1,Felső tagozat,6.0
+4.2.2,Óvoda,0.0
+4.2.3,Óvoda,0.0
+4.2.4,Alsó tagozat,33.0
+4.2.4,Felső tagozat,37.0
+4.2.5,Alsó tagozat,3.0
+4.2.5,Felső tagozat,0.0
+4.2.6,Óvoda,0.0
+4.2.7,Alsó tagozat,11.0
+4.2.7,Felső tagozat,6.0
 4.3.0,Alsó tagozat,14.0
 4.3.0,Felső tagozat,0.0
-4.3.1,Alsó tagozat,6.0
-4.3.1,Felső tagozat,0.0
-4.3.2,Alsó tagozat,3.0
+4.3.1,Óvoda,17.0
+4.3.2,Alsó tagozat,6.0
 4.3.2,Felső tagozat,0.0
-4.3.3,Alsó tagozat,33.0
-4.3.3,Felső tagozat,51.0
-4.3.4,Alsó tagozat,117.0
-4.3.4,Felső tagozat,167.0
-4.3.5,Alsó tagozat,7.0
-4.3.5,Felső tagozat,0.0
-4.3.6,Alsó tagozat,24.0
-4.3.6,Felső tagozat,27.0
-4.3.7,Alsó tagozat,41.0
-4.3.7,Felső tagozat,29.0
-4.3.8,Alsó tagozat,0.0
-4.3.8,Felső tagozat,0.0
-4.3.9,Alsó tagozat,41.0
-4.3.9,Felső tagozat,55.0
-4.3.10,Alsó tagozat,11.0
-4.3.10,Felső tagozat,0.0
-4.3.11,Alsó tagozat,58.0
-4.3.11,Felső tagozat,60.0
-4.3.12,Alsó tagozat,0.0
+4.3.3,Alsó tagozat,3.0
+4.3.3,Felső tagozat,0.0
+4.3.3,Óvoda,7.0
+4.3.4,Alsó tagozat,33.0
+4.3.4,Felső tagozat,51.0
+4.3.4,Óvoda,16.0
+4.3.5,Alsó tagozat,117.0
+4.3.5,Felső tagozat,167.0
+4.3.5,Óvoda,26.0
+4.3.6,Alsó tagozat,7.0
+4.3.6,Felső tagozat,0.0
+4.3.7,Alsó tagozat,24.0
+4.3.7,Felső tagozat,27.0
+4.3.8,Alsó tagozat,41.0
+4.3.8,Felső tagozat,29.0
+4.3.9,Alsó tagozat,0.0
+4.3.9,Felső tagozat,0.0
+4.3.10,Alsó tagozat,41.0
+4.3.10,Felső tagozat,55.0
+4.3.11,Óvoda,1.0
+4.3.12,Alsó tagozat,11.0
 4.3.12,Felső tagozat,0.0
-4.4.0,Alsó tagozat,39.0
-4.4.0,Felső tagozat,44.0
-4.4.1,Alsó tagozat,28.0
-4.4.1,Felső tagozat,30.0
-4.4.2,Alsó tagozat,30.0
-4.4.2,Felső tagozat,42.0
-4.4.3,Alsó tagozat,10.0
-4.4.3,Felső tagozat,11.0
-4.4.4,Alsó tagozat,18.0
+4.3.13,Alsó tagozat,58.0
+4.3.13,Felső tagozat,60.0
+4.3.13,Óvoda,18.0
+4.3.14,Alsó tagozat,0.0
+4.3.14,Felső tagozat,0.0
+4.4.0,Óvoda,6.0
+4.4.1,Alsó tagozat,39.0
+4.4.1,Felső tagozat,44.0
+4.4.2,Alsó tagozat,28.0
+4.4.2,Felső tagozat,30.0
+4.4.3,Alsó tagozat,30.0
+4.4.3,Felső tagozat,42.0
+4.4.4,Alsó tagozat,10.0
 4.4.4,Felső tagozat,11.0
-4.4.5,Alsó tagozat,40.0
-4.4.5,Felső tagozat,35.0
-4.4.6,Alsó tagozat,34.0
-4.4.6,Felső tagozat,27.0
-4.4.7,Alsó tagozat,3.0
-4.4.7,Felső tagozat,0.0
-4.4.8,Alsó tagozat,0.0
-4.4.8,Felső tagozat,0.0
-4.4.9,Alsó tagozat,10.0
-4.4.9,Felső tagozat,13.0
+4.4.5,Alsó tagozat,18.0
+4.4.5,Felső tagozat,11.0
+4.4.6,Óvoda,5.0
+4.4.7,Alsó tagozat,40.0
+4.4.7,Felső tagozat,35.0
+4.4.7,Óvoda,8.0
+4.4.8,Alsó tagozat,34.0
+4.4.8,Felső tagozat,27.0
+4.4.9,Alsó tagozat,3.0
+4.4.9,Felső tagozat,0.0
+4.4.10,Alsó tagozat,0.0
+4.4.10,Felső tagozat,0.0
+4.4.11,Alsó tagozat,10.0
+4.4.11,Felső tagozat,13.0
+4.4.11,Óvoda,10.0
 4.5.0,Alsó tagozat,5.0
 4.5.0,Felső tagozat,0.0
 4.6.0,Alsó tagozat,30.0
@@ -3168,6 +3187,7 @@ ID,age,value
 4.6.3,Felső tagozat,147.0
 4.6.4,Alsó tagozat,206.0
 4.6.4,Felső tagozat,193.0
+4.6.4,Óvoda,62.0
 4.6.5,Alsó tagozat,55.0
 4.6.5,Felső tagozat,62.0
 4.6.6,Alsó tagozat,42.0
@@ -3178,6 +3198,7 @@ ID,age,value
 4.6.8,Felső tagozat,50.0
 4.6.9,Alsó tagozat,133.0
 4.6.9,Felső tagozat,161.0
+4.6.9,Óvoda,54.0
 4.6.10,Alsó tagozat,19.0
 4.6.10,Felső tagozat,0.0
 4.6.11,Alsó tagozat,8.0
@@ -3188,18 +3209,22 @@ ID,age,value
 4.6.13,Felső tagozat,141.0
 4.6.14,Alsó tagozat,635.0
 4.6.14,Felső tagozat,706.0
+4.6.14,Óvoda,212.0
 4.6.15,Alsó tagozat,221.0
 4.6.15,Felső tagozat,246.0
+4.6.15,Óvoda,157.0
 4.6.16,Alsó tagozat,37.0
 4.6.16,Felső tagozat,54.0
 4.7.0,Alsó tagozat,190.0
 4.7.0,Felső tagozat,225.0
+4.7.0,Óvoda,88.0
 4.7.1,Alsó tagozat,42.0
 4.7.1,Felső tagozat,0.0
 4.7.2,Alsó tagozat,13.0
 4.7.2,Felső tagozat,0.0
 4.7.3,Alsó tagozat,44.0
 4.7.3,Felső tagozat,49.0
+4.7.3,Óvoda,24.0
 4.7.4,Alsó tagozat,0.0
 4.7.4,Felső tagozat,0.0
 4.7.5,Alsó tagozat,7.0
@@ -3218,6 +3243,7 @@ ID,age,value
 4.7.11,Felső tagozat,51.0
 4.7.12,Alsó tagozat,252.0
 4.7.12,Felső tagozat,318.0
+4.7.12,Óvoda,171.0
 4.7.13,Alsó tagozat,5.0
 4.7.13,Felső tagozat,0.0
 4.7.14,Alsó tagozat,51.0
@@ -3226,6 +3252,7 @@ ID,age,value
 4.7.15,Felső tagozat,100.0
 4.7.16,Alsó tagozat,23.0
 4.7.16,Felső tagozat,34.0
+4.7.16,Óvoda,19.0
 4.7.17,Alsó tagozat,41.0
 4.7.17,Felső tagozat,56.0
 4.7.18,Alsó tagozat,52.0
@@ -3248,6 +3275,7 @@ ID,age,value
 4.7.26,Felső tagozat,47.0
 4.7.27,Alsó tagozat,57.0
 4.7.27,Felső tagozat,49.0
+4.7.27,Óvoda,9.0
 4.7.28,Alsó tagozat,0.0
 4.7.28,Felső tagozat,0.0
 4.7.29,Alsó tagozat,0.0
@@ -3256,3 +3284,4 @@ ID,age,value
 4.7.30,Felső tagozat,0.0
 4.7.31,Alsó tagozat,446.0
 4.7.31,Felső tagozat,457.0
+4.7.31,Óvoda,138.0
