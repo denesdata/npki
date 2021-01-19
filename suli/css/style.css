@@ -216,3 +216,9 @@ a:hover {
     width: 96%;
     padding: 10px;
 }
+
+#attribution {
+    position: fixed;
+    bottom: 10px;
+    left: 20px;
+}

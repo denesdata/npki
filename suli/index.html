@@ -59,24 +59,25 @@
                 <div id="topText"></div>
 
                 <hr>
-
-                <div id="searchTitle" class="title">Írd be egy régió, megye/járás/körzet vagy település nevét:</div>
-                <div class="form-group">
-                    <select id="searchBox" class="combobox input-large form-control" style="display: none;" onchange="searchEvent(this.value)">
+                <div id='legendAndSearch'>
+                    <div id="searchTitle" class="title">Írd be egy régió, megye/járás/körzet vagy település nevét:</div>
+                    <div class="form-group">
+                        <select id="searchBox" class="combobox input-large form-control" style="display: none;" onchange="searchEvent(this.value)">
 						 <option value="" selected="selected">Search...</option>
 					</select>
-                </div>
-
-                <div class="row text-center" style="margin-top: 30px;">
-                    <div class="col-sm-6">
-                        <div id="legendTitle">Jelmagyarázat</div>
-                        <div id="legendText">A buborékok mérete az adott településen nyilvántartott, magyarul tanuló gyerekek számával arányos. A mérőszám az óvodás, illetve alsó és felső tagozatos általános iskolás gyerekek összlétszámát jelöli.
-                        </div>
                     </div>
-                    <div id="legendRowWrapper" class="col-sm-6">
-                        <div id="legendTitle" style="text-align: center;">Gyerekek száma</div>
-                        <div class="legendSubTitle">2019-ben</div>
-                        <div id="legendCircles"></div>
+
+                    <div class="row text-center" style="margin-top: 30px;">
+                        <div class="col-sm-6">
+                            <div id="legendTitle">Jelmagyarázat</div>
+                            <div id="legendText">A buborékok mérete az adott településen nyilvántartott, magyarul tanuló gyerekek számával arányos. A mérőszám az óvodás, illetve alsó és felső tagozatos általános iskolás gyerekek összlétszámát jelöli.
+                            </div>
+                        </div>
+                        <div id="legendRowWrapper" class="col-sm-6">
+                            <div id="legendTitle" style="text-align: center;">Gyerekek száma</div>
+                            <div class="legendSubTitle">2019-ben</div>
+                            <div id="legendCircles"></div>
+                        </div>
                     </div>
                 </div>
 
@@ -87,8 +88,7 @@
                     <script src="https://public.flourish.studio/resources/embed.js"></script>
                 </div>
                 <div id='explorer' style="height:700px;overflow:hidden;">
-                    <iframe width="100%" height="740" src="https://app.powerbi.com/view?r=eyJrIjoiMTg3ODQ1YjMtYTBhOC00ZDlkLWE4YjUtYzIyNTI4MTM1MmZjIiwidCI6IjUxMGM0Y2MwLTdiMDctNGIyOC05Yjk5LWY2YzMzMDEwMjA5ZiIsImMiOjh9&pageName=ReportSectionbabc29a1b06de5c50740" frameborder="0"
-                        allowFullScreen="true"></iframe>
+                    <iframe width="100%" height="740" src="https://app.powerbi.com/view?r=eyJrIjoiNGViYTgyYzMtZWFiNC00ZDcxLWIzMjMtYWVlYWRlZWVmMjRlIiwidCI6IjUxMGM0Y2MwLTdiMDctNGIyOC05Yjk5LWY2YzMzMDEwMjA5ZiIsImMiOjh9" frameborder="0" allowFullScreen="true"></iframe>
                 </div>
             </div>
         </div>
@@ -113,7 +113,7 @@
         ]
 
         var subTitle = ['Gyereklétszámok településenként és oktatási szintenként',
-            'ds',
+            'Gyereklétszámok 2010 és 2019 közöti százalékos változása',
             'jk'
         ]
 
@@ -122,6 +122,7 @@
             d3.select('#topText').text(topText[e])
             d3.select('#subTitle').text(subTitle[e])
             d3.select('#chart').style('opacity', (e == 0) ? 1 : 0).style('z-index', (e == 0) ? 10 : 5)
+            d3.select('#legendAndSearch').style('opacity', (e == 0) ? 1 : 0).style('z-index', (e == 0) ? 10 : 5)
             d3.select('#timeline').style('opacity', (e == 1) ? 1 : 0).style('z-index', (e == 1) ? 10 : 5)
             d3.select('#explorer').style('opacity', (e == 2) ? 1 : 0).style('z-index', (e == 2) ? 10 : 5)
         }
