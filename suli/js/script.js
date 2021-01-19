@@ -70,7 +70,8 @@ function drawAll(error, ageCSV, idCSV, occupations) {
 
     var colorBar = d3.scale.ordinal()
         // .domain(["16 to 19", "20 to 24", "25 to 34", "35 to 44", "45 to 54", "55 to 64", "65+"])
-        .range(["#EFB605", "#E3690B", "#CF003E", "#991C71", "#4F54A8", "#07997E", "#7EB852"]);
+        // .range(["#EFB605", "#E3690B", '#4575b4', "#CF003E", "#991C71", "#4F54A8", "#07997E", "#7EB852"]);
+        .range(["#fdae61", "#457b9d", '#e63946', "#CF003E", "#991C71", "#4F54A8", "#07997E", "#7EB852"]);
 
     var diameter = Math.min(width * 0.9, height * 0.9),
         radius = diameter / 2;
