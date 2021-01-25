@@ -60,7 +60,7 @@
                 </div>
             </div>
         </div>
-        <div class="row text-center" style="margin-top: 20px;">
+        <div class="row text-center" style="margin-top: 20px; visibility:hidden;">
             <div class="col-sm-4" id='menu-col'>
                 <div id="subTitle"></div>
 
@@ -82,14 +82,7 @@
                             </div>
                         </div>
                         <div id="legendRowWrapper" class="col-sm-6">
-                            <div id="legendTitle" style="text-align: center;">
-                                <a href='#' onclick='rseload();'>
-                                    <div class="col-sm-6">Gyerekek</div>
-                                </a>
-                                <a href='#' onclick='sreload("2");'>
-                                    <div class="col-sm-6">Intézmények</div>
-                                </a>
-                            </div><br><br>
+                            <div id="legendTitle" style="text-align: center;"></div>
                             <div class="legendSubTitle">2019-ben</div>
                             <div id="legendCircles"></div>
                         </div>
@@ -102,14 +95,14 @@
                 <div id='timeline' style="height:740px;" class="flourish-embed" data-src="story/728301">
                     <script src="https://public.flourish.studio/resources/embed.js"></script>
                 </div>
-                <div id='explorer' style="height:800px;overflow:hidden;">
-                    <iframe width="100%" height="817" src="https://app.powerbi.com/view?r=eyJrIjoiNGViYTgyYzMtZWFiNC00ZDcxLWIzMjMtYWVlYWRlZWVmMjRlIiwidCI6IjUxMGM0Y2MwLTdiMDctNGIyOC05Yjk5LWY2YzMzMDEwMjA5ZiIsImMiOjh9" frameborder="0" allowFullScreen="true"></iframe>
+                <div id='explorer' style="height:700px;overflow:hidden;">
+                    <iframe width="100%" height="727" src="https://app.powerbi.com/view?r=eyJrIjoiNGViYTgyYzMtZWFiNC00ZDcxLWIzMjMtYWVlYWRlZWVmMjRlIiwidCI6IjUxMGM0Y2MwLTdiMDctNGIyOC05Yjk5LWY2YzMzMDEwMjA5ZiIsImMiOjh9" frameborder="0" allowFullScreen="true"></iframe>
                 </div>
             </div>
         </div>
 
         <!-- Attribution -->
-        <div class="row text-center">
+        <div class="row text-center" style="visibility:hidden;">
             <div class="col-sm-12">
                 <div id="attribution">
                     <span>Bethlen Gábor Alapkezelő Zrt. | <a href="https://bgazrt.hu/nemzetpolitikai-kutatointezet/" target='_blank'>Nemzetpolitikai Kutatóintézet</a> | 
@@ -144,9 +137,7 @@
         }
 
         clicked(0);
-        // d3.select('#legendTitle').text(gyerekek + ' száma')
-
-        reload(i)
+        d3.select('#legendTitle').text(gyerekek + ' száma')
     </script>
 </body>
 

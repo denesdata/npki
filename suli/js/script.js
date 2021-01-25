@@ -1,11 +1,14 @@
 var i = ''; //2
 var gyerekek = (i == '2') ? 'Intézmények' : 'Gyerekek'
 var gyerek = (i == '2') ? 'intézmény' : 'gyerek'
-queue()
-    .defer(d3.csv, "data/kp" + i + ".csv")
-    .defer(d3.csv, "data/kl" + i + ".csv")
-    .defer(d3.json, "data/kq" + i + ".json")
-    .await(drawAll);
+
+function reload(i) {
+    queue()
+        .defer(d3.csv, "data/kp" + i + ".csv")
+        .defer(d3.csv, "data/kl" + i + ".csv")
+        .defer(d3.json, "data/kq" + i + ".json")
+        .await(drawAll);
+}
 
 //Initiates practically everything
 function drawAll(error, ageCSV, idCSV, occupations) {
