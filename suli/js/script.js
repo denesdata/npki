@@ -1,4 +1,6 @@
-i = '';
+var i = ''; //2
+var gyerekek = (i == '2') ? 'Intézmények' : 'Gyerekek'
+var gyerek = (i == '2') ? 'intézmény' : 'gyerek'
 queue()
     .defer(d3.csv, "data/kp" + i + ".csv")
     .defer(d3.csv, "data/kl" + i + ".csv")
@@ -27,7 +29,7 @@ function drawAll(error, ageCSV, idCSV, occupations) {
 
     var padding = 20,
         width = Math.max($("#chart").innerWidth(), 350) - padding,
-        height = (mobileSize | window.innerWidth < 768 ? width : window.innerHeight - 90);
+        height = (mobileSize | window.innerWidth < 768 ? width : window.innerHeight - 190);
 
     var centerX = width / 2,
         centerY = height / 2;
@@ -71,7 +73,7 @@ function drawAll(error, ageCSV, idCSV, occupations) {
     var colorBar = d3.scale.ordinal()
         // .domain(["16 to 19", "20 to 24", "25 to 34", "35 to 44", "45 to 54", "55 to 64", "65+"])
         // .range(["#EFB605", "#E3690B", '#4575b4', "#CF003E", "#991C71", "#4F54A8", "#07997E", "#7EB852"]);
-        .range(["#fdae61", "#457b9d", '#e63946', "#CF003E", "#991C71", "#4F54A8", "#07997E", "#7EB852"]);
+        .range(['#e63946', "#fdae61", "#457b9d", "#CF003E", "#991C71", "#4F54A8", "#07997E", "#7EB852"]);
 
     var diameter = Math.min(width * 0.9, height * 0.9),
         radius = diameter / 2;
@@ -203,7 +205,7 @@ function drawAll(error, ageCSV, idCSV, occupations) {
                         chosenContext.fillStyle = "rgba(191,191,191," + textAlpha + ")" //"#BFBFBF";
                         chosenContext.textAlign = "center";
                         chosenContext.textBaseline = "middle";
-                        chosenContext.fillText("Összesen " + commaFormat(node.size) + " gyerek (2019-ben)", nodeX, nodeY + -0.3 * nodeR);
+                        chosenContext.fillText("Összesen " + commaFormat(node.size) + " " + gyerek + " (2019-ben)", nodeX, nodeY + -0.3 * nodeR);
 
                         //Get the text back in pieces that will fit inside the node
                         var titleText = getLines(chosenContext, node.name, nodeR * 2 * 0.7, fontSizeTitle, titleFont);
@@ -399,6 +401,7 @@ function drawAll(error, ageCSV, idCSV, occupations) {
                     if (node) {
                         //Only show a popover for the leaf nodes
                         if (typeof node.ID !== "undefined") {
+                            // if (true) {
                             //Needed for placement
                             var nodeX = ((node.x - zoomInfo.centerX) * zoomInfo.scale) + centerX,
                                 nodeY = ((node.y - zoomInfo.centerY) * zoomInfo.scale) + centerY,

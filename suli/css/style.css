@@ -31,7 +31,7 @@ a:hover {
 #subTitle {
     text-align: left;
     margin-bottom: 5px;
-    /* margin-top: 10px; */
+    margin-top: 10px;
     font-size: 16px;
     color: #BFBFBF;
     font-family: 'Playfair Display', sans-serif;
@@ -68,7 +68,7 @@ a:hover {
 #topText {
     text-align: left;
     font-family: 'Merriweather Sans', sans-serif;
-    font-size: 11px;
+    font-size: 13px;
     /*margin-bottom: 10px;*/
     line-height: 1.5;
     color: #7D7D7D;
@@ -80,12 +80,12 @@ a:hover {
 }
 
 .form-control {
-    font-size: 11px;
+    font-size: 13px;
     font-family: 'Merriweather Sans', sans-serif;
 }
 
 .dropdown-menu {
-    font-size: 11px;
+    font-size: 13px;
     font-family: 'Merriweather Sans', sans-serif;
 }
 
@@ -99,14 +99,14 @@ a:hover {
     text-align: left;
     font-family: 'Playfair Display', sans-serif;
     margin-bottom: 5px;
-    font-size: 13px;
+    font-size: 14px;
     color: #1c1c1c;
 }
 
 #legendText {
     text-align: left;
     margin-bottom: 10px;
-    font-size: 10px;
+    font-size: 12px;
     line-height: 1.5;
     font-family: 'Merriweather Sans', sans-serif;
     color: #7D7D7D;
@@ -135,14 +135,15 @@ a:hover {
 .legendSubTitle {
     color: #BFBFBF;
     text-anchor: middle;
-    font-size: 10px;
+    font-size: 12px;
     line-height: 1.2;
     font-family: 'Merriweather Sans', sans-serif;
 }
 
 .legendText {
     text-anchor: start;
-    font-size: 9px;
+    font-size: 11px;
+    fill: #757575;
 }
 
 #attribution {
