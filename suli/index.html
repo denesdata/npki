@@ -39,28 +39,26 @@
             <div class="col-sm-4">
                 <div class="titlebar">
                     <div class="col-sm-2 logo" style="max-width: 75px;">
-                        <a href='https://bgazrt.hu/nemzetpolitikai-kutatointezet/' target='_blank'><img
-                                src="img/npki.png"></a>
+                        <a href='https://bgazrt.hu/nemzetpolitikai-kutatointezet/' target='_blank'><img src="img/npki.png"></a>
                     </div>
                     <div class="col-sm-10">
-                        <a href='#' onclick='clicked(3);'><div id="topTitle" class="title">Külhoni Magyar<br>Oktatási Adatfelfedező</div></a>
+                        <a href='#' onclick='clicked(3);'>
+                            <div id="topTitle" class="title">Külhoni Magyar<br>Oktatási Adatfelfedező</div>
+                        </a>
                     </div>
                 </div>
             </div>
             <div class="col-sm-8">
                 <div id='menu'>
                     <div class="col-sm-4">
-                        <a href='#' onclick='clicked(0);'><img src="img/BubblePlot150.png">&nbsp;&nbsp;&nbsp;<span
-                                class='active'>Települések (2019)</span></a>
+                        <a href='#' onclick='clicked(0);'><img src="img/BubblePlot150.png">&nbsp;&nbsp;&nbsp;<span class='active'>Települések (2019)</span></a>
                     </div>
                     <div class="col-sm-4">
-                        <a href='#' onclick='clicked(1);'><img
-                                src="img/ScatterConnected150.png">&nbsp;&nbsp;&nbsp;<span>Éves változás
+                        <a href='#' onclick='clicked(1);'><img src="img/ScatterConnected150.png">&nbsp;&nbsp;&nbsp;<span>Éves változás
                                 (2010-19)</span></a>
                     </div>
                     <div class="col-sm-4">
-                        <a href='#' onclick='clicked(2);'><img
-                                src="img/Heatmap150.png">&nbsp;&nbsp;&nbsp;<span>Adatfelfedező (2010-20)</span></a>
+                        <a href='#' onclick='clicked(2);'><img src="img/Heatmap150.png">&nbsp;&nbsp;&nbsp;<span>Adatfelfedező (2010-20)</span></a>
                     </div>
                 </div>
             </div>
@@ -75,19 +73,15 @@
                 <div id='legendAndSearch'>
                     <div id="searchTitle" class="title">Írd be egy régió, megye/járás/körzet vagy település nevét:</div>
                     <div class="form-group">
-                        <select id="searchBox" class="combobox input-large form-control" style="display: none;"
-                            onchange="searchEvent(this.value)">
+                        <select id="searchBox" class="combobox input-large form-control" style="display: none;" onchange="searchEvent(this.value)">
                             <option value="" selected="selected">Keresés régióra, megye/járás/körzetre vagy településre...</option>
                         </select>
                     </div>
 
                     <div class="row text-center" style="margin-top: 30px;">
-                        <div class="col-sm-6">
-                            <div id="legendTitle">Jelmagyarázat</div>
-                            <div id="legendText">A buborékok mérete az adott településen nyilvántartott, magyarul tanuló
-                                gyerekek számával arányos. A mérőszám az óvodás, illetve alsó és felső tagozatos
-                                általános iskolás gyerekek összlétszámát jelöli.
-                            </div>
+                        <div class="col-sm-6" id="legendTitleWrapper">
+                            <div id="legendTitle"></div>
+                            <div id="legendText"></div>
                         </div>
                         <div id="legendRowWrapper" class="col-sm-6">
                             <div id="legendTitle2" style="text-align: center;">
@@ -108,15 +102,13 @@
             <div class="col-sm-8" id='chart-col' style='min-height:711px;'>
                 <div id="chart"></div>
                 <div id="school">
-                    <img src='img/cerka.png' style='width:70%;margin-top:7%;'>
+                    <img src='img/cerka.jpg' style='width:95%;margin-top:3%;'>
                 </div>
                 <div id='timeline' style="height:740px;" class="flourish-embed" data-src="story/728301">
                     <script src="https://public.flourish.studio/resources/embed.js"></script>
                 </div>
                 <div id='explorer' style="height:710px;overflow:hidden;">
-                    <iframe width="100%" height="740"
-                        src="https://app.powerbi.com/view?r=eyJrIjoiZWU1M2MyODItZjkyMi00NGE3LWE4NTktZTgxYWY1NzllNTc1IiwidCI6IjUxMGM0Y2MwLTdiMDctNGIyOC05Yjk5LWY2YzMzMDEwMjA5ZiIsImMiOjh9"
-                        frameborder="0" allowFullScreen="true"></iframe>
+                    <iframe width="100%" height="740" src="https://app.powerbi.com/view?r=eyJrIjoiZWU1M2MyODItZjkyMi00NGE3LWE4NTktZTgxYWY1NzllNTc1IiwidCI6IjUxMGM0Y2MwLTdiMDctNGIyOC05Yjk5LWY2YzMzMDEwMjA5ZiIsImMiOjh9" frameborder="0" allowFullScreen="true"></iframe>
                 </div>
             </div>
         </div>
@@ -136,16 +128,28 @@
 
     <script src="js/script.js"></script>
     <script>
-        var topText = ['Ez a vizualizáció az 1388 határon túli településen magyar nyelven tanuló 181553 óvodás és általános iskolás gyereket hivatott reprezentálni. A buborékok régiók, megyék/járások/körzetek és települések szerint csoportosítják a gyerekeket. Az egyes buborékokon belüli oszlopdiagramok az óvodás, illetve alsó- és felső tagozatos diákok számát jelöli, a 2019-es évben. Az egyes buborékokra kattintva közelítéssel böngészhetsz - vagy használhatod az alábbi keresőmezőt.',
-            'Ez a vizualizáció egy átfogó képet ad a határon túli magyar nyelvű oktatásban zajló trendekről. A megjelenítési forma úgynevezett "változás-diagram", amely azt mutatja meg, hogy mekkora volt a százalékos változás a 2010 és a 2019-es évek között. A jobb oldalon, pozitív zónában elhelyezkedő pontok gyereklétszám-növekedést jelentenek az adott kategórára nézve, míg a negatív tartományban elhelyezkedő pontok csökkenést jeleznek. A hegedű-vonalak az pontok eloszlását jelölik, egy-egy kategórián belül. 6 dián mutatjuk be a gyereklétszám változásást régiónként, oktatási szintenként és osztályonként. A vizualizáció bal felső sarkában található nyilakra kattintva lépegethetsz a diák között. A színmmagyarázatok interaktívak, rájuk kattintva ki-be kapcsolhatod a különböző adat-kategóriákat.',
-            'A szűrő jobb felső sarkában megjelenő radír ✏ ikonnal törölheted az összes kiválasztott szűrési kritériumot. Minden vizualizáció jobb felső sarkában találsz egy nagyítás ↗ ikont. Erre kattintva az adott vizualizáció kerül teljes képernyőn a a fókuszba.',
-            'Impresszum, adatok forrása'
+        var topText = ['Ez a vizualizáció az 1388 határon túli településen magyar nyelven tanuló 181553 óvodás és általános iskolás gyereket hivatott reprezentálni. A buborékok régiók (országok), megyék/ járások/ körzetek és települések szerint csoportosítják a gyerekeket (tehát az adott településen, de különböző intézményekben tanuló gyerekek számát összegeztük). <br><br>Az egyes buborékokon belüli oszlopdiagramok az óvodás, illetve alsó- és felső tagozatos diákok számát jelölik, a 2019-es évben (Kárpátalja esetében az óvodák legutolsó értékeke 2018-ra van meg, ezt tűntettük fel). Az egyes buborékokra kattintva ▶ ráközelítéssel böngészhetsz - vagy használhatod az alábbi <b>keresőmezőt</b>. Dupla kattintással ▶▶ visszaléphetsz a kezdeti nézetre, a háttérre kattintva pedig egy szinttel fennebb léphetsz a hierarchiában. A keresőmező alatti részen kiválaszthatod, hogy az adott településen szereplő <b><a href="#" onclick="sreload(0);">Gyerekek</a></b> vagy az <b><a href="#" onclick="sreload(1);">Intézmények</a></b> száma alapján szeretnéd méretezni a buborékokat.',
+            'Ez a vizualizáció egy átfogó képet ad a határon túli magyar nyelvű oktatásban zajló trendekről. A megjelenítési forma úgynevezett <b>változás-diagram</b>.<br><br> A jobb oldalon, pozitív zónában elhelyezkedő pontok gyereklétszám-növekedést jelentenek az adott kategórára nézve, míg a negatív tartományban elhelyezkedő pontok csökkenést jeleznek. A hegedű-vonalak az pontok eloszlását jelölik, egy-egy kategórián belül. 8 dián mutatjuk be a gyereklétszám változásást régiónként, oktatási szintenként és osztályonként. A vizualizáció bal felső sarkában található nyilakra kattintva ▶ lépegethetsz a diák között. A színmagyarázatok interaktívak, rájuk kattintva ▶ ki-be kapcsolhatod a különböző adat-kategóriákat.',
+            'Ezen az eszközön több, összekapcsolt adatvizualizációt találsz. A bal oldalon taláható szűrő segítségével kiválaszthatsz egy teljes régiót, vagy megyét/ járást/ körzetet, vagy tallózhatsz az ide tartozó települések között, illetve az egyes településeken jegyzett oktatási intézményekre is egyenként szűrhetsz. Egyszerre több lehetőséget is kiejölhetsz. Ugyanakkor lehetőséged van évek és oktatási szintek, illetve évfolyamok szerinti szűrésre is. A szűrők jobb felső sarkában megjelenő radír ✏ ikonnal ▶ törölheted az összes kiválasztott szűrési kritériumot. Üres szűrés esetén mindenik opció megjelenik a diagrammokon. <br><br>A vizualizáció három vonaldiagrammot és egy táblázatot tartalmaz. A jobb felső diagrammon mutatjuk a kiválasztott intézmények és évfolyamok diákjainak<b>Település</b>-szintű összegzését, illetve a jobb alsó diagrammon az <b>Intézmények</b> szerinti bontásuk. Ugyanezt az információt a táblázatban ismételjük. A középső diagrammon az oktatási szintek szerinti eloszlás található. Minden vizualizáció jobb felső sarkában találsz egy nagyítás ↗ ikont. Erre kattintva ▶ az adott vizualizáció kerül teljes képernyőn a fókuszba.',
+            'Az vizualizáció Erdély, Felvidék, Vajdaság és Kárpátalja magyar nyelvű oktatását mutatja be, három felületen. A <b>Külhoni Magyar Oktatási Adatbázis</b> régiók (országok), megyék/ járások/ körzetek, települések és oktatási intézmények szerint listázza a diákszámokat, évről évre 2010 és 2020 között, óvodától a felső tagozat utolsó évfolyamáig (8-ik vagy 9-ik osztály). Kárpátalján óvodai adatok csak 2014-ben és 2018-ban szerepelnek. 2020-as adatok csak Erdélyről vannak. Ellenben Erdélyről hiányzanak a 2010-es óvodai adatsorok és a teljes 2018-as adatok.<br><br>Az oldal tetején található menüben váltogathatunk a különböző megjelenítési formák között. A <b><a href="#" onclick="clicked(0);">Települések</a></b> menüpontban a gyerek- és intézményszámok eloszlásást mutatjuk egy buborék-diagrammon. Ez hasznos áttekintőul szolgál a különböző régiók közötti skálabeli különbségek gyors szemléltetésére. Az <b><a href="#" onclick="clicked(1);">Éves változás</a></b> alatt a gyereklétszámok <b>2010</b> (Erdélyi óvodai adatok esetében 2011) és <b>2019</b> (Kárpátaljai óvodai adatok esetében 2018) közötti <i>változását</i> mutatjuk, 2010-hez viszonyított százalékos értékben. Az <b><a href="#" onclick="clicked(2);">Adatfelfedező</a></b> minialkalmazásban az adatokat <b>Intézményi</b> és <b>Települési</b> szintű lebontásban vizsgálhatjuk, régiókra, minden évre és évfolyamokra lebontva. A <b><a href="#" onclick="clicked(3);">cím</a></b>-re kattintva visszatérhet erre az oldalra.'
         ]
 
         var subTitle = ['Gyereklétszámok településenként és oktatási szintenként',
             'Gyereklétszámok 2010 és 2019 közöti százalékos változása',
             'Adatfelfedező eszköz',
-            'Bemutató, a projekt részletes leírása'
+            'A külhoni magyar oktatás helyzetének vizuális története 2010 és 2020 között'
+        ]
+
+        var legendTitle = ['Jelmagyarázat',
+            'Jelmagyarázat',
+            'Jelmagyarázat',
+            'Impresszum'
+        ]
+
+        var legendText = ['A buborékok mérete az adott településen nyilvántartott, magyarul tanuló gyerekek vagy intézmények számával arányos. A mérőszám az adot településen feljegyzett óvodás, illetve alsó és felső tagozatos általános iskolás gyerekek összlétszámát (ha több intézmény található egy településen belül, akkor összesítve) jelöli.',
+            'A vizualizációkon a függőleges tengely mindig különböző adat-kategóriákat jelöl (például régiók, megyék vagy évfolyamok). A pontok vízszintes tengely menti elheyezkedése azt mutatja meg, hogy mekkora volt a <i>százalékos változás</i> a 2010 és a 2019-es évek között (Kárpátalja esetében az óvodák legutolsó értékeke 2018-ra, illetve Erdély esetében az óvodák legkorábbi értékeke 2011-re van meg, így ezen értékek alapján számoltuk a változásokat).',
+            'Minden diagrammon a diáklétszámok évek szerinti értékeit mutatjuk, különböző dimenziók szerinti bontásban.',
+            'A kutatást és az adatvizualizáció elkészítését a <b><a href="https://bgazrt.hu/nemzetpolitikai-kutatointezet/" target="_blank">Nemzetpolitikai Kutatóintézet</a></b> a <b>Bethlen Gábor Alapkezelő Zrt.</b> által finanszírozta. Az adatvizualizációt <b><a href="https://data.csaladen.es" target="_blank">Csala Dénes</a></b> készítette.<br><br>Külön köszönet jár <b>Vita Emesé</b>nek, <b>Márton János</b>nak és <b>Csala Dénes</b>nek az erdélyi oktatási adatbázis elkészítésében nyújtott segítségéért, illetve <b>Rákóczi Krisztián</b>nak és <b>Ferenc Viktóriá</b>nak az adatvizualizáció finomításában nyújtott segítségéért.<br><br>Nemzetpolitikai Kutatóintézet &copy; 2021'
         ]
 
         // d3.select('.titlebar').style('transform', 'translate(125%, 300%)')
@@ -153,14 +157,20 @@
 
         function clicked(e) {
             console.log(e)
-            d3.select('#topText').text(topText[e])
-            d3.select('#subTitle').text(subTitle[e])
+            d3.select('#topText').html(topText[e])
+            d3.select('#subTitle').html(subTitle[e])
+            d3.select('#legendTitle').html(legendTitle[e])
+            d3.select('#legendText').html(legendText[e])
+            d3.select('#legendAndSearch').style('opacity', ((e == 0) || (e == 1) || (e == 2) || (e == 3)) ? 1 : 0).style('z-index', (e == 0) ? 10 : 5)
+            d3.select('#legendRowWrapper').selectAll('div').style('opacity', (e == 0) ? 1 : 0).style('z-index', (e == 0) ? 10 : 5)
+            d3.select('#searchTitle').style('display', (e == 0) ? 'block' : 'none').style('z-index', (e == 0) ? 10 : 5)
+            d3.select('.form-group').style('display', (e == 0) ? 'block' : 'none').style('z-index', (e == 0) ? 10 : 5)
             d3.select('#chart').style('opacity', (e == 0) ? 1 : 0).style('z-index', (e == 0) ? 10 : 5)
-            d3.select('#legendAndSearch').style('opacity', (e == 0) ? 1 : 0).style('z-index', (e == 0) ? 10 : 5)
             d3.select('#timeline').style('opacity', (e == 1) ? 1 : 0).style('z-index', (e == 1) ? 10 : 5)
             d3.select('#explorer').style('opacity', (e == 2) ? 1 : 0).style('z-index', (e == 2) ? 10 : 5)
             d3.select('#school').style('opacity', (e == 3) ? 1 : 0).style('z-index', (e == 2) ? 10 : 5)
             d3.select('#menu-col').attr('class', ((e == 0) || (e == 3)) ? 'col-sm-4' : 'col-sm-2').style('z-index', (e == 2) ? 10 : 5)
+            d3.select('#legendTitleWrapper').attr('class', ((e == 0) || (e == 3)) ? 'col-sm-6' : 'col-sm-12')
 
             d3.select('#menu').selectAll('.active2').classed('active2', false)
             d3.select(d3.select('#menu').selectAll('a').select('span')[0][e]).classed('active2', true)
@@ -172,13 +182,11 @@
             d3.select(d3.select('#legendTitle2').selectAll('a').select('div')[0][e]).classed('active2', true)
             d3.select('#chart').selectAll('canvas').remove()
             d3.select('.combobox-container').remove()
-            reload((e==0)?'':'2')    
+            reload((e == 0) ? '' : '2')
         }
 
-        clicked(3);
-        // d3.select('#legendTitle').text(gyerekek + ' száma')
-
         reload('')
+        clicked(3);
     </script>
 </body>
 

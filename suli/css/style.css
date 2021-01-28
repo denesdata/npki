@@ -1,5 +1,6 @@
 body {
     /* background-image: linear-gradient(red, yellow); */
+    overflow: hidden;
 }
 
 #chart {
@@ -227,7 +228,7 @@ a:hover {
 }
 
 #explorer {
-    width: 125%;
+    width: 120%;
 }
 
 #timeline {
@@ -251,4 +252,8 @@ a:hover {
 
 .inithidden {
     display: none;
+}
+
+canvas:hover {
+    cursor: pointer;
 }

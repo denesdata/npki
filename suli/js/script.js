@@ -21,14 +21,14 @@ function drawAll(error, ageCSV, idCSV, occupations) {
     //There has to be a more foolproof way than this...
     //var mobileSize = true;
     //if (!("ontouchstart" in document.documentElement) | window.innerWidth > 900) mobileSize = false;
-    window.mobileAndTabletcheck = function () {
-        var check = false;
-        (function (a) {
-            if (/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino|android|ipad|playbook|silk/i.test(a) || /1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(a.substr(0, 4))) check = true
-        })
-        (navigator.userAgent || navigator.vendor || window.opera);
-        return check;
-    } //function mobileAndTabletcheck
+    window.mobileAndTabletcheck = function() {
+            var check = false;
+            (function(a) {
+                if (/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino|android|ipad|playbook|silk/i.test(a) || /1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(a.substr(0, 4))) check = true
+            })
+            (navigator.userAgent || navigator.vendor || window.opera);
+            return check;
+        } //function mobileAndTabletcheck
     var mobileSize = window.mobileAndTabletcheck();
 
     var padding = 20,
@@ -96,10 +96,10 @@ function drawAll(error, ageCSV, idCSV, occupations) {
     var pack = d3.layout.pack()
         .padding(1)
         .size([diameter, diameter])
-        .value(function (d) {
+        .value(function(d) {
             return d.size;
         })
-        .sort(function (d) {
+        .sort(function(d) {
             return d.ID;
         });
 
@@ -113,7 +113,7 @@ function drawAll(error, ageCSV, idCSV, occupations) {
         nodeCount = nodes.length;
 
     var nodeByName = {};
-    nodes.forEach(function (d, i) {
+    nodes.forEach(function(d, i) {
         nodeByName[d.name] = d;
     });
 
@@ -122,24 +122,24 @@ function drawAll(error, ageCSV, idCSV, occupations) {
     ////////////////////////////////////////////////////////////// 
 
     //Turn the value into an actual numeric value
-    ageCSV.forEach(function (d) {
+    ageCSV.forEach(function(d) {
         d.value = +d.value;
     });
 
     //Create new dataset grouped by ID
     data = d3.nest()
-        .key(function (d) {
+        .key(function(d) {
             return d.ID;
         })
         .entries(ageCSV);
 
     //Find the max value per ID - needed for the bar scale setting per mini bar chart
     dataMax = d3.nest()
-        .key(function (d) {
+        .key(function(d) {
             return d.ID;
         })
-        .rollup(function (d) {
-            return d3.max(d, function (g) {
+        .rollup(function(d) {
+            return d3.max(d, function(g) {
                 return g.value;
             });
         })
@@ -147,14 +147,16 @@ function drawAll(error, ageCSV, idCSV, occupations) {
 
     //Array to keep track of which ID belongs to which index in the array
     var dataById = {};
-    data.forEach(function (d, i) {
+    data.forEach(function(d, i) {
         dataById[d.key] = i;
     });
 
     var IDbyName = {};
+    var NamebyID = {};
     //Small file to get the IDs of the non leaf circles
-    idCSV.forEach(function (d, i) {
+    idCSV.forEach(function(d, i) {
         IDbyName[d.name] = d.ID;
+        NamebyID[d.ID] = d.name;
     });
 
     ////////////////////////////////////////////////////////////// 
@@ -228,13 +230,13 @@ function drawAll(error, ageCSV, idCSV, occupations) {
                         //Get the text back in pieces that will fit inside the node
                         var titleText = getLines(chosenContext, node.name, nodeR * 2 * 0.7, fontSizeTitle, titleFont);
                         //Loop over all the pieces and draw each line
-                        titleText.forEach(function (txt, iterator) {
-                            chosenContext.font = fontSizeTitle + "px " + titleFont;
-                            chosenContext.fillStyle = "rgba(" + mainTextColor[0] + "," + mainTextColor[1] + "," + mainTextColor[2] + "," + textAlpha + ")";
-                            chosenContext.textAlign = "center";
-                            chosenContext.textBaseline = "middle";
-                            chosenContext.fillText(txt, nodeX, nodeY + (-0.45 + iterator * 0.125) * nodeR);
-                        }) //forEach
+                        titleText.forEach(function(txt, iterator) {
+                                chosenContext.font = fontSizeTitle + "px " + titleFont;
+                                chosenContext.fillStyle = "rgba(" + mainTextColor[0] + "," + mainTextColor[1] + "," + mainTextColor[2] + "," + textAlpha + ")";
+                                chosenContext.textAlign = "center";
+                                chosenContext.textBaseline = "middle";
+                                chosenContext.fillText(txt, nodeX, nodeY + (-0.45 + iterator * 0.125) * nodeR);
+                            }) //forEach
 
                     } //if
 
@@ -353,37 +355,37 @@ function drawAll(error, ageCSV, idCSV, occupations) {
     };
 
     //Function to run oif a user clicks on the canvas
-    var clickFunction = function (e) {
-        //Figure out where the mouse click occurred.
-        var mouseX = e.offsetX; //e.layerX;
-        var mouseY = e.offsetY; //e.layerY;
+    var clickFunction = function(e) {
+            //Figure out where the mouse click occurred.
+            var mouseX = e.offsetX; //e.layerX;
+            var mouseY = e.offsetY; //e.layerY;
 
-        // Get the corresponding pixel color on the hidden canvas and look up the node in our map.
-        // This will return that pixel's color
-        var col = hiddenContext.getImageData(mouseX, mouseY, 1, 1).data;
-        //Our map uses these rgb strings as keys to nodes.
-        var colString = "rgb(" + col[0] + "," + col[1] + "," + col[2] + ")";
-        var node = colToCircle[colString];
+            // Get the corresponding pixel color on the hidden canvas and look up the node in our map.
+            // This will return that pixel's color
+            var col = hiddenContext.getImageData(mouseX, mouseY, 1, 1).data;
+            //Our map uses these rgb strings as keys to nodes.
+            var colString = "rgb(" + col[0] + "," + col[1] + "," + col[2] + ")";
+            var node = colToCircle[colString];
 
-        //If there was an actual node clicked on, zoom into this
-        if (node) {
-            //If the same node is clicked twice, set it to the top (root) level
-            if (focus === node) node = root;
+            //If there was an actual node clicked on, zoom into this
+            if (node) {
+                //If the same node is clicked twice, set it to the top (root) level
+                if (focus === node) node = root;
 
-            //Save the names of the circle itself and first children
-            //Needed to check which arc titles to show
-            kids = [node.name];
-            if (typeof node.children !== "undefined") {
-                for (var i = 0; i < node.children.length; i++) {
-                    kids.push(node.children[i].name)
-                } //for i
-            } //if
+                //Save the names of the circle itself and first children
+                //Needed to check which arc titles to show
+                kids = [node.name];
+                if (typeof node.children !== "undefined") {
+                    for (var i = 0; i < node.children.length; i++) {
+                        kids.push(node.children[i].name)
+                    } //for i
+                } //if
 
-            //Perform the zoom
-            zoomToCanvas(node);
-        } //if -> node
+                //Perform the zoom
+                zoomToCanvas(node);
+            } //if -> node
 
-    } //function clickFunction
+        } //function clickFunction
 
     //Listen for clicks on the main canvas
     //document.getElementById("canvas").addEventListener("click", clickFunction);
@@ -398,65 +400,66 @@ function drawAll(error, ageCSV, idCSV, occupations) {
         var nodeOld = root;
 
         //Listen for mouse moves on the main canvas
-        var mousemoveFunction = function (e) {
-            //Figure out where the mouse click occurred.
-            var mouseX = e.offsetX; //e.layerX;
-            var mouseY = e.offsetY; //e.layerY;
+        var mousemoveFunction = function(e) {
+                //Figure out where the mouse click occurred.
+                var mouseX = e.offsetX; //e.layerX;
+                var mouseY = e.offsetY; //e.layerY;
 
-            // Get the corresponding pixel color on the hidden canvas and look up the node in our map.
-            // This will return that pixel's color
-            var col = hiddenContext.getImageData(mouseX, mouseY, 1, 1).data;
-            //Our map uses these rgb strings as keys to nodes.
-            var colString = "rgb(" + col[0] + "," + col[1] + "," + col[2] + ")";
-            var node = colToCircle[colString];
+                // Get the corresponding pixel color on the hidden canvas and look up the node in our map.
+                // This will return that pixel's color
+                var col = hiddenContext.getImageData(mouseX, mouseY, 1, 1).data;
+                //Our map uses these rgb strings as keys to nodes.
+                var colString = "rgb(" + col[0] + "," + col[1] + "," + col[2] + ")";
+                var node = colToCircle[colString];
 
-            //Only change the popover if the user mouses over something new
-            if (node !== nodeOld) {
-                //Remove all previous popovers
-                $('.popoverWrapper').remove();
-                $('.popover').each(function () {
-                    $('.popover').remove();
-                });
-                //Only continue when the user mouses over an actual node
-                if (node) {
-                    //Only show a popover for the leaf nodes
-                    if (typeof node.ID !== "undefined") {
-                        // if (true) {
-                        //Needed for placement
-                        var nodeX = ((node.x - zoomInfo.centerX) * zoomInfo.scale) + centerX,
-                            nodeY = ((node.y - zoomInfo.centerY) * zoomInfo.scale) + centerY,
-                            nodeR = node.r * zoomInfo.scale;
+                //Only change the popover if the user mouses over something new
+                if (node !== nodeOld) {
+                    //Remove all previous popovers
+                    $('.popoverWrapper').remove();
+                    $('.popover').each(function() {
+                        $('.popover').remove();
+                    });
+                    //Only continue when the user mouses over an actual node
+                    if (node) {
+                        //Only show a popover for the leaf nodes
+                        // if (typeof node.ID !== "undefined") {
+                        //Replace previous with depth-based rule and dont show focus node tooltip
+                        if ((node.depth > 1) & (node !== focus)) {
+                            //Needed for placement
+                            var nodeX = ((node.x - zoomInfo.centerX) * zoomInfo.scale) + centerX,
+                                nodeY = ((node.y - zoomInfo.centerY) * zoomInfo.scale) + centerY,
+                                nodeR = node.r * zoomInfo.scale;
 
-                        //Create the wrapper div for the popover
-                        var div = document.createElement('div');
-                        div.setAttribute('class', 'popoverWrapper');
-                        document.getElementById('chart').appendChild(div);
+                            //Create the wrapper div for the popover
+                            var div = document.createElement('div');
+                            div.setAttribute('class', 'popoverWrapper');
+                            document.getElementById('chart').appendChild(div);
 
-                        //Position the wrapper right above the circle
-                        $(".popoverWrapper").css({
-                            'position': 'absolute',
-                            'top': nodeY - nodeR,
-                            'left': nodeX + padding * 5 / 4
-                        });
+                            //Position the wrapper right above the circle
+                            $(".popoverWrapper").css({
+                                'position': 'absolute',
+                                'top': nodeY - nodeR,
+                                'left': nodeX + padding * 5 / 4
+                            });
 
-                        //Show the tooltip
-                        $(".popoverWrapper").popover({
-                            placement: 'auto top',
-                            container: 'body',
-                            trigger: 'manual',
-                            html: true,
-                            animation: false,
-                            content: function () {
-                                return "<span class='nodeTooltip'>" + node.name + "</span>";
-                            }
-                        });
-                        $(".popoverWrapper").popover('show');
-                    } //if -> typeof node.ID !== "undefined"
-                } //if -> node
-            } //if -> node !== nodeOld
+                            //Show the tooltip
+                            $(".popoverWrapper").popover({
+                                placement: 'auto top',
+                                container: 'body',
+                                trigger: 'manual',
+                                html: true,
+                                animation: false,
+                                content: function() {
+                                    return "<span class='nodeTooltip'>" + node.name.replace(' ', '') + "</span>";
+                                }
+                            });
+                            $(".popoverWrapper").popover('show');
+                        } //if -> typeof node.ID !== "undefined"
+                    } //if -> node
+                } //if -> node !== nodeOld
 
-            nodeOld = node;
-        } //function mousemoveFunction
+                nodeOld = node;
+            } //function mousemoveFunction
 
         //document.getElementById("canvas").addEventListener("mousemove", mousemoveFunction);
         $("#canvas").on("mousemove", mousemoveFunction);
@@ -484,7 +487,7 @@ function drawAll(error, ageCSV, idCSV, occupations) {
 
         //Remove all previous popovers - if present
         $('.popoverWrapper').remove();
-        $('.popover').each(function () {
+        $('.popover').each(function() {
             $('.popover').remove();
         });
 
@@ -546,7 +549,7 @@ function drawAll(error, ageCSV, idCSV, occupations) {
 
                 //Update the texts in the legend
                 d3.select(".legendWrapper").selectAll(".legendText")
-                    .text(function (d) {
+                    .text(function(d) {
                         return commaFormat(Math.round(scaleFactor * d * d / 10) * 10);
                     });
 
@@ -624,7 +627,7 @@ function drawAll(error, ageCSV, idCSV, occupations) {
     ////////////////////////////////////////////////////////////// 
 
     //Create options - all the occupations
-    var options = nodes.map(function (d) {
+    var options = nodes.map(function(d) {
         return d.name;
     });
 
@@ -642,12 +645,12 @@ function drawAll(error, ageCSV, idCSV, occupations) {
     $('.combobox').combobox();
 
     //Function to call once the search box is filled in
-    searchEvent = function (occupation) {
-        //If the occupation is not equal to the default
-        if (occupation !== "" & typeof occupation !== "undefined") {
-            zoomToCanvas(nodeByName[occupation]);
-        } //if 
-    } //searchEvent
+    searchEvent = function(occupation) {
+            //If the occupation is not equal to the default
+            if (occupation !== "" & typeof occupation !== "undefined") {
+                zoomToCanvas(nodeByName[occupation]);
+            } //if 
+        } //searchEvent
 
     ////////////////////////////////////////////////////////////// 
     /////////////////////// FPS Stats box //////////////////////// 
@@ -691,7 +694,7 @@ function drawAll(error, ageCSV, idCSV, occupations) {
     //This function runs during changes in the visual - during a zoom
     function animate() {
         var dt = 0;
-        d3.timer(function (elapsed) {
+        d3.timer(function(elapsed) {
             interpolateZoom(elapsed - dt);
             interpolateFadeText(elapsed - dt);
             dt = elapsed;
@@ -709,7 +712,7 @@ function drawAll(error, ageCSV, idCSV, occupations) {
 ////////////////////////////////////////////////////////////// 
 
 //Needed in the global scope
-var searchEvent = function (occupation) {};
+var searchEvent = function(occupation) {};
 
 //If there is a scroll bar then its fine
 //But if there is no scrollbar prevent one from occuring when the user opens the search box
@@ -791,12 +794,12 @@ function createLegend(scaleFactor) {
     svg.selectAll(".legendCircle")
         .data(legendSizes)
         .enter().append("circle")
-        .attr('r', function (d) {
+        .attr('r', function(d) {
             return d;
         })
         .attr('class', "legendCircle")
         .attr('cx', legendCenter)
-        .attr('cy', function (d) {
+        .attr('cy', function(d) {
             return legendBottom - d;
         });
     //Draw the line connecting the top of the circle to the number
@@ -805,11 +808,11 @@ function createLegend(scaleFactor) {
         .enter().append("line")
         .attr('class', "legendLine")
         .attr('x1', legendCenter)
-        .attr('y1', function (d) {
+        .attr('y1', function(d) {
             return legendBottom - 2 * d;
         })
         .attr('x2', legendCenter + legendLineLength)
-        .attr('y2', function (d) {
+        .attr('y2', function(d) {
             return legendBottom - 2 * d;
         });
     //Place the value next to the line
@@ -818,11 +821,11 @@ function createLegend(scaleFactor) {
         .enter().append("text")
         .attr('class', "legendText")
         .attr('x', legendCenter + legendLineLength + textPadding)
-        .attr('y', function (d) {
+        .attr('y', function(d) {
             return legendBottom - 2 * d;
         })
         .attr('dy', '0.3em')
-        .text(function (d) {
+        .text(function(d) {
             return commaFormat(Math.round(scaleFactor * d * d / 10) * 10);
         });
 
