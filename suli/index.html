@@ -1,7 +1,45 @@
 <!DOCTYPE html>
 
 <head>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1REFWTL9FR"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'G-1REFWTL9FR');
+    </script>
+
     <meta charset="utf-8">
+    <title>Külhoni Magyar Oktatási Adatfelfedező</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="content-Type" content="text/html; charset=utf-8" />
+    <meta name="description" content="A külhoni magyar oktatás helyzetének vizuális története 2010 és 2020 között: a vizualizáció Erdély, Felvidék, Vajdaság és Kárpátalja magyar nyelvű oktatását mutatja be, három felületen. A Külhoni Magyar Oktatási Adatbázis régiók (országok), megyék/ járások/ körzetek, települések és oktatási intézmények szerint listázza a diákszámokat, évről évre 2010 és 2020 között, óvodától a felső tagozat utolsó évfolyamáig (8-ik vagy 9-ik osztály). #NPKI">
+    <meta name="author" content="Denes Csala">
+    <meta name="keywords" content="bgazrt npki oktatás magyar hungarian education felvidék szlovákia ukrajna kárpátalja szerbia délvidék vajdaság erdély románia transylvania iskola school óvoda kindergarden kindergarten bga dataviz d3plus csaladenes dc2 d3js d3"
+    />
+    <meta property="og:image" content="https://data.csaladen.es/npki/suli/snapshot.png" />
+    <meta property="og:description" content="A külhoni magyar oktatás helyzetének vizuális története 2010 és 2020 között: a vizualizáció Erdély, Felvidék, Vajdaság és Kárpátalja magyar nyelvű oktatását mutatja be, három felületen. A Külhoni Magyar Oktatási Adatbázis régiók (országok), megyék/ járások/ körzetek, települések és oktatási intézmények szerint listázza a diákszámokat, évről évre 2010 és 2020 között, óvodától a felső tagozat utolsó évfolyamáig (8-ik vagy 9-ik osztály).  #NPKI">
+    <meta property="og:title" content="Külhoni Magyar Oktatási Adatfelfedező" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="https://data.csaladen.es/npki/suli/" />
+    <meta property="og:url" content="https://data.csaladen.es/npki/suli/" />
+    <meta property="fb:admins" content="NemzetpolitikaiKutatointezet" />
+    <link rel="icon" href="https://bgazrt.hu/wp-content/uploads/2018/07/xcropped-bgafavicon1-32x32.jpg.pagespeed.ic.z2l0TbZS1T.webp" sizes="32x32" />
+    <link rel="icon" href="https://bgazrt.hu/wp-content/uploads/2018/07/xcropped-bgafavicon1-192x192.jpg.pagespeed.ic.YW1Hc425_w.webp" sizes="192x192" />
+    <link rel="apple-touch-icon-precomposed" href="https://bgazrt.hu/wp-content/uploads/2018/07/xcropped-bgafavicon1-180x180.jpg.pagespeed.ic.4meuDzEsTO.webp" />
+    <meta name="msapplication-TileImage" content="https://bgazrt.hu/wp-content/uploads/2018/07/cropped-bgafavicon1-270x270.jpg" />
+
+    <!-- |---------------------------------------------------------------------------| -->
+    <!-- viz created by: Denes Csala Data Consulting | https://data.csaladen.es | 2021 -->
+    <!-- MIT LICENSE | https://data.csaladen.es/leap/LICENSE  --------------------------->
+    <!-- |---------------------------------------------------------------------------| -->
 
     <!-- Google fonts -->
     <link href='https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700' rel='stylesheet' type='text/css'>
@@ -27,8 +65,6 @@
 
     <!-- Stylesheet -->
     <link rel="stylesheet" href="css/style.css">
-
-    <title>Külhoni Magyar Oktatási Adatfelfedező</title>
 
 </head>
 
@@ -133,7 +169,7 @@
             var topText = ['Ez a vizualizáció az 1388 határon túli településen magyar nyelven tanuló 181553 óvodás és általános iskolás gyereket hivatott reprezentálni. A buborékok régiók (országok), megyék/ járások/ körzetek és települések szerint csoportosítják a gyerekeket (tehát az adott településen, de különböző intézményekben tanuló gyerekek számát összegeztük). <br><br>Az egyes buborékokon belüli oszlopdiagramok az óvodás, illetve alsó- és felső tagozatos diákok számát jelölik, a 2019-es évben (Kárpátalja esetében az óvodák legutolsó értékeke 2018-ra van meg, ezt tűntettük fel). Az egyes buborékokra kattintva ▶ ráközelítéssel böngészhetsz - vagy használhatod az alábbi <b>keresőmezőt</b>. Dupla kattintással ▶▶ visszaléphetsz a kezdeti nézetre, a háttérre kattintva pedig egy szinttel fennebb léphetsz a hierarchiában. A keresőmező alatti részen kiválaszthatod, hogy az adott településen szereplő <b><a href="#" onclick="sreload(0);">Gyerekek</a></b> vagy az <b><a href="#" onclick="sreload(1);">Intézmények</a></b> száma alapján szeretnéd méretezni a buborékokat.',
                 'Ez a vizualizáció egy átfogó képet ad a határon túli magyar nyelvű oktatásban zajló trendekről. A megjelenítési forma úgynevezett <b>változás-diagram</b>.<br><br> A jobb oldalon, pozitív zónában elhelyezkedő pontok gyereklétszám-növekedést jelentenek az adott kategórára nézve, míg a negatív tartományban elhelyezkedő pontok csökkenést jeleznek. A hegedű-vonalak az pontok eloszlását jelölik, egy-egy kategórián belül. 8 dián mutatjuk be a gyereklétszám változásást régiónként, oktatási szintenként és osztályonként. A vizualizáció bal felső sarkában található nyilakra kattintva ▶ lépegethetsz a diák között. A színmagyarázatok interaktívak, rájuk kattintva ▶ ki-be kapcsolhatod a különböző adat-kategóriákat.',
                 'Ezen az eszközön több, összekapcsolt adatvizualizációt találsz. A bal oldalon taláható szűrő segítségével kiválaszthatsz egy teljes régiót, vagy megyét/ járást/ körzetet, vagy tallózhatsz az ide tartozó települések között, illetve az egyes településeken jegyzett oktatási intézményekre is egyenként szűrhetsz. Egyszerre több lehetőséget is kiejölhetsz. Ugyanakkor lehetőséged van évek és oktatási szintek, illetve évfolyamok szerinti szűrésre is. A szűrők jobb felső sarkában megjelenő radír ✏ ikonnal ▶ törölheted az összes kiválasztott szűrési kritériumot. Üres szűrés esetén mindenik opció megjelenik a diagrammokon. <br><br>A vizualizáció három vonaldiagrammot és egy táblázatot tartalmaz. A jobb felső diagrammon mutatjuk a kiválasztott intézmények és évfolyamok diákjainak<b>Település</b>-szintű összegzését, illetve a jobb alsó diagrammon az <b>Intézmények</b> szerinti bontásuk. Ugyanezt az információt a táblázatban ismételjük. A középső diagrammon az oktatási szintek szerinti eloszlás található. Minden vizualizáció jobb felső sarkában találsz egy nagyítás ↗ ikont. Erre kattintva ▶ az adott vizualizáció kerül teljes képernyőn a fókuszba.',
-                'Az vizualizáció Erdély, Felvidék, Vajdaság és Kárpátalja magyar nyelvű oktatását mutatja be, három felületen. A <b>Külhoni Magyar Oktatási Adatbázis</b> régiók (országok), megyék/ járások/ körzetek, települések és oktatási intézmények szerint listázza a diákszámokat, évről évre 2010 és 2020 között, óvodától a felső tagozat utolsó évfolyamáig (8-ik vagy 9-ik osztály). Kárpátalján óvodai adatok csak 2014-ben és 2018-ban szerepelnek. 2020-as adatok csak Erdélyről vannak. Ellenben Erdélyről hiányzanak a 2010-es óvodai adatsorok és a teljes 2018-as adatok.<br><br>Az oldal tetején található menüben váltogathatunk a különböző megjelenítési formák között. A <b><a href="#" onclick="clicked(0);">Települések</a></b> menüpontban a gyerek- és intézményszámok eloszlásást mutatjuk egy buborék-diagrammon. Ez hasznos áttekintőul szolgál a különböző régiók közötti skálabeli különbségek gyors szemléltetésére. Az <b><a href="#" onclick="clicked(1);">Éves változás</a></b> alatt a gyereklétszámok <b>2010</b> (Erdélyi óvodai adatok esetében 2011) és <b>2019</b> (Kárpátaljai óvodai adatok esetében 2018) közötti <i>változását</i> mutatjuk, 2010-hez viszonyított százalékos értékben. Az <b><a href="#" onclick="clicked(2);">Adatfelfedező</a></b> minialkalmazásban az adatokat <b>Intézményi</b> és <b>Települési</b> szintű lebontásban vizsgálhatjuk, régiókra, minden évre és évfolyamokra lebontva. A <b><a href="#" onclick="clicked(3);">cím</a></b>-re kattintva visszatérhet erre az oldalra.'
+                'A vizualizáció Erdély, Felvidék, Vajdaság és Kárpátalja magyar nyelvű oktatását mutatja be, három felületen. A <b>Külhoni Magyar Oktatási Adatbázis</b> régiók (országok), megyék/ járások/ körzetek, települések és oktatási intézmények szerint listázza a diákszámokat, évről évre 2010 és 2020 között, óvodától a felső tagozat utolsó évfolyamáig (8-ik vagy 9-ik osztály). Kárpátalján óvodai adatok csak 2014-ben és 2018-ban szerepelnek. 2020-as adatok csak Erdélyről vannak. Ellenben Erdélyről hiányzanak a 2010-es óvodai adatsorok és a teljes 2018-as adatok.<br><br>Az oldal tetején található menüben váltogathatunk a különböző megjelenítési formák között. A <b><a href="#" onclick="clicked(0);">Települések</a></b> menüpontban a gyerek- és intézményszámok eloszlásást mutatjuk egy buborék-diagrammon. Ez hasznos áttekintőul szolgál a különböző régiók közötti skálabeli különbségek gyors szemléltetésére. Az <b><a href="#" onclick="clicked(1);">Éves változás</a></b> alatt a gyereklétszámok <b>2010</b> (Erdélyi óvodai adatok esetében 2011) és <b>2019</b> (Kárpátaljai óvodai adatok esetében 2018) közötti <i>változását</i> mutatjuk, 2010-hez viszonyított százalékos értékben. Az <b><a href="#" onclick="clicked(2);">Adatfelfedező</a></b> minialkalmazásban az adatokat <b>Intézményi</b> és <b>Települési</b> szintű lebontásban vizsgálhatjuk, régiókra, minden évre és évfolyamokra lebontva. A <b><a href="#" onclick="clicked(3);">cím</a></b>-re kattintva visszatérhet erre az oldalra.'
             ]
 
             var subTitle = ['Gyereklétszámok településenként és oktatási szintenként',
