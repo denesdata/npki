@@ -24,6 +24,10 @@ body {
     cursor: default;
 }
 
+.szam {
+    font-family: 'Merriweather Sans', sans-serif;
+}
+
 a,
 a:hover {
     color: #333333;

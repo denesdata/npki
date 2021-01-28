@@ -451,7 +451,7 @@ function drawAll(error, ageCSV, idCSV, occupations) {
                                 html: true,
                                 animation: false,
                                 content: function() {
-                                    return "<span class='nodeTooltip'>" + node.name.replace(' ', '') + "</span>";
+                                    return "<span class='nodeTooltip'><b>" + node.name.replace(' ', '') + "</b>: <span class='szam'>" + node.value + "</span> " + ((Mi == '2') ? 'intézmény' : 'gyerek') + "</span>";
                                 }
                             });
                             $(".popoverWrapper").popover('show');
