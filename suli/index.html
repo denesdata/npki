@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
+<html lang="en">
 
 <head>
 
@@ -41,239 +42,1292 @@
     <!-- MIT LICENSE | https://data.csaladen.es/npki/suli/LICENSE  --------------------------->
     <!-- |---------------------------------------------------------------------------| -->
 
-    <!-- Google fonts -->
-    <link href='https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Playfair+Display:300,400' rel='stylesheet' type='text/css'>
-
-    <!-- D3.js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
-    <script src="https://d3js.org/queue.v1.min.js"></script>
-
-    <!-- stats -->
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/stats.js/r14/Stats.js"></script> -->
-
-    <!-- jQuery -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-
-    <!-- Bootstrap -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-
-    <!-- Combobox script for the search box -->
-    <script src="js/bootstrap-combobox.js"></script>
-    <link href="css/bootstrap-combobox.css" rel="stylesheet">
-
-    <!-- Stylesheet -->
-    <link rel="stylesheet" href="css/style.css">
-
+    <style>
+        html,
+        body {
+            margin: 0;
+            width: 100%;
+            height: 100%;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        
+        #dialogText {
+            padding: 10px 30px;
+            color: white;
+            background-color: #333333;
+        }
+        
+        #dialogWrap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: table;
+            background-color: #EEEEEE;
+        }
+        
+        #dialogWrapCell {
+            display: table-cell;
+            text-align: center;
+            vertical-align: middle;
+        }
+        
+        #mainDialog {
+            max-width: 400px;
+            margin: 5px;
+            border: solid #AAAAAA 1px;
+            border-radius: 10px;
+            box-shadow: 3px 3px 5px 3px #AAAAAA;
+            margin-left: auto;
+            margin-right: auto;
+            background-color: #FFFFFF;
+            overflow: hidden;
+            text-align: left;
+        }
+        
+        #passArea {
+            padding: 20px 30px;
+            background-color: white;
+        }
+        
+        #passArea>* {
+            margin: 5px auto;
+        }
+        
+        #pass {
+            width: 100%;
+            height: 40px;
+            font-size: 30px;
+        }
+        
+        #messageWrapper {
+            float: left;
+            vertical-align: middle;
+            line-height: 30px;
+        }
+        
+        .notifyText {
+            display: none;
+        }
+        
+        #invalidPass {
+            color: red;
+        }
+        
+        #success {
+            color: green;
+        }
+        
+        #submitPass {
+            font-size: 20px;
+            border-radius: 5px;
+            background-color: #E7E7E7;
+            border: solid gray 1px;
+            float: right;
+        }
+        
+        #contentFrame {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        #attribution {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            text-align: center;
+            padding: 10px;
+            font-weight: bold;
+            font-size: 0.8em;
+        }
+        
+        #attribution,
+        #attribution a {
+            color: #999;
+        }
+    </style>
 </head>
 
 <body>
-    <div id="ucont">
-        <div id="cont" class="container-fluid inithidden2">
-
-            <div class="row text-center" style="margin-top: 20px;">
-                <div class="col-sm-4">
-                    <div class="titlebar">
-                        <div class="col-sm-2 logo" style="max-width: 75px;">
-                            <a href='https://bgazrt.hu/nemzetpolitikai-kutatointezet/' target='_blank'><img src="img/npki.png"></a>
-                        </div>
-                        <div class="col-sm-10">
-                            <a href='#' onclick='clicked(3);'>
-                                <div id="topTitle" class="title">Külhoni Magyar<br>Oktatási Adatfelfedező</div>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-8">
-                    <div id='menu'>
-                        <div class="col-sm-4">
-                            <a href='#' onclick='clicked(0);'><img src="img/BubblePlot150.png">&nbsp;&nbsp;&nbsp;<span class='active'>Települések (2019)</span></a>
-                        </div>
-                        <div class="col-sm-4">
-                            <a href='#' onclick='clicked(1);'><img src="img/ScatterConnected150.png">&nbsp;&nbsp;&nbsp;<span>Éves változás
-                                (2010-19)</span></a>
-                        </div>
-                        <div class="col-sm-4">
-                            <a href='#' onclick='clicked(2);'><img src="img/Heatmap150.png">&nbsp;&nbsp;&nbsp;<span>Adatfelfedező (2010-20)</span></a>
-                        </div>
+    <iframe id="contentFrame" frameBorder="0" allowfullscreen></iframe>
+    <div id="dialogWrap">
+        <div id="dialogWrapCell">
+            <div id="mainDialog">
+                <div id="dialogText">Ez az oldal jelszóval védett.</div>
+                <div id="passArea">
+                    <p id="passwordPrompt">Jelszó</p>
+                    <input id="pass" type="password" name="pass" autofocus>
+                    <div>
+                        <span id="messageWrapper">
+                            <span id="invalidPass" class="notifyText">Próbáld újra...</span>
+                        <span id="success" class="notifyText">Sikeresen bejelentkeztél!</span> &nbsp;
+                        </span>
+                        <button id="submitPass" type="button">Elküldés</button>
+                        <div style="clear: both;"></div>
                     </div>
                 </div>
             </div>
-            <div class="row text-center" style="margin-top: 20px;">
-                <div class="col-sm-4" id='menu-col'>
-                    <div id="subTitle"></div>
-
-                    <div id="topText"></div>
-
-                    <hr>
-                    <div id='legendAndSearch'>
-                        <div id="searchTitle" class="title">Írd be egy régió, megye/járás/körzet vagy település nevét:</div>
-                        <div class="form-group">
-                            <select id="searchBox" class="combobox input-large form-control" style="display: none;" onchange="searchEvent(this.value)">
-                            <option value="" selected="selected">Keresés régióra, megye/járás/körzetre vagy településre...</option>
-                        </select>
-                        </div>
-
-                        <div class="row text-center" style="margin-top: 30px;">
-                            <div class="col-sm-6" id="legendTitleWrapper">
-                                <div id="legendTitle"></div>
-                                <div id="legendText"></div>
-                            </div>
-                            <div id="legendRowWrapper" class="col-sm-6">
-                                <div id="legendTitle2" style="text-align: center;">
-                                    <a href='#' onclick='sreload(0);'>
-                                        <div class="col-sm-6 active2">Gyerekek</div>
-                                    </a>
-                                    <a href='#' onclick='sreload(1);'>
-                                        <div class="col-sm-6">Intézmények</div>
-                                    </a>
-                                </div><br><br>
-                                <div class="legendSubTitle">2019-ben</div>
-                                <div id="legendCircles"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="col-sm-8" id='chart-col' style='min-height:711px;'>
-                    <div id="chart"></div>
-                    <div id="school">
-                        <img src='img/cerka.jpg' style='width:95%;margin-top:3%;'>
-                    </div>
-                    <div id='timeline' style="height:740px;" class="flourish-embed" data-src="story/728301">
-                        <script src="https://public.flourish.studio/resources/embed.js"></script>
-                    </div>
-                    <div id='explorer' style="height:710px;overflow:hidden;">
-                        <iframe width="100%" height="740" src="https://app.powerbi.com/view?r=eyJrIjoiZWU1M2MyODItZjkyMi00NGE3LWE4NTktZTgxYWY1NzllNTc1IiwidCI6IjUxMGM0Y2MwLTdiMDctNGIyOC05Yjk5LWY2YzMzMDEwMjA5ZiIsImMiOjh9" frameborder="0" allowFullScreen="true"></iframe>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Attribution -->
-            <div class="row text-center">
-                <div class="col-sm-12">
-                    <div id="attribution">
-                        <span>Bethlen Gábor Alapkezelő Zrt. | <a href="https://bgazrt.hu/nemzetpolitikai-kutatointezet/"
-                            target='_blank'>Nemzetpolitikai Kutatóintézet</a> |
-                        Vizualizáció: <a href="https://data.csaladen.es" target='_blank'>Csala Dénes</a></span>
-                    </div>
-                </div>
-            </div>
-
         </div>
-        <!-- </div> -->
-
-        <script src="js/script.js"></script>
-        <script>
-            var topText = ['Ez a vizualizáció az 1388 határon túli településen magyar nyelven tanuló 181553 óvodás és általános iskolás gyereket hivatott reprezentálni. A buborékok régiók (országok), megyék/ járások/ körzetek és települések szerint csoportosítják a gyerekeket (tehát az adott településen, de különböző intézményekben tanuló gyerekek számát összegeztük). <br><br>Az egyes buborékokon belüli oszlopdiagramok az óvodás, illetve alsó- és felső tagozatos diákok számát jelölik, a 2019-es évben (Kárpátalja esetében az óvodák legutolsó értékeke 2018-ra van meg, ezt tűntettük fel). Az egyes buborékokra kattintva ▶ ráközelítéssel böngészhetsz - vagy használhatod az alábbi <b>keresőmezőt</b>. Dupla kattintással ▶▶ visszaléphetsz a kezdeti nézetre, a háttérre kattintva pedig egy szinttel fennebb léphetsz a hierarchiában. A keresőmező alatti részen kiválaszthatod, hogy az adott településen szereplő <b><a href="#" onclick="sreload(0);">Gyerekek</a></b> vagy az <b><a href="#" onclick="sreload(1);">Intézmények</a></b> száma alapján szeretnéd méretezni a buborékokat.',
-                'Ez a vizualizáció egy átfogó képet ad a határon túli magyar nyelvű oktatásban zajló trendekről. A megjelenítési forma úgynevezett <b>változás-diagram</b>.<br><br> A jobb oldalon, pozitív zónában elhelyezkedő pontok gyereklétszám-növekedést jelentenek az adott kategórára nézve, míg a negatív tartományban elhelyezkedő pontok csökkenést jeleznek. A hegedű-vonalak az pontok eloszlását jelölik, egy-egy kategórián belül. 8 dián mutatjuk be a gyereklétszám változásást régiónként, oktatási szintenként és osztályonként. A vizualizáció bal felső sarkában található nyilakra kattintva ▶ lépegethetsz a diák között. A színmagyarázatok interaktívak, rájuk kattintva ▶ ki-be kapcsolhatod a különböző adat-kategóriákat.',
-                'Ezen az eszközön több, összekapcsolt adatvizualizációt találsz. A bal oldalon taláható szűrő segítségével kiválaszthatsz egy teljes régiót, vagy megyét/ járást/ körzetet, vagy tallózhatsz az ide tartozó települések között, illetve az egyes településeken jegyzett oktatási intézményekre is egyenként szűrhetsz. Egyszerre több lehetőséget is kiejölhetsz. Ugyanakkor lehetőséged van évek és oktatási szintek, illetve évfolyamok szerinti szűrésre is. A szűrők jobb felső sarkában megjelenő radír ✏ ikonnal ▶ törölheted az összes kiválasztott szűrési kritériumot. Üres szűrés esetén mindenik opció megjelenik a diagrammokon. <br><br>A vizualizáció három vonaldiagrammot és egy táblázatot tartalmaz. A jobb felső diagrammon mutatjuk a kiválasztott intézmények és évfolyamok diákjainak<b>Település</b>-szintű összegzését, illetve a jobb alsó diagrammon az <b>Intézmények</b> szerinti bontásuk. Ugyanezt az információt a táblázatban ismételjük. A középső diagrammon az oktatási szintek szerinti eloszlás található. Minden vizualizáció jobb felső sarkában találsz egy nagyítás ↗ ikont. Erre kattintva ▶ az adott vizualizáció kerül teljes képernyőn a fókuszba.',
-                'A vizualizáció Erdély, Felvidék, Vajdaság és Kárpátalja magyar nyelvű oktatását mutatja be, három felületen. A <b>Külhoni Magyar Oktatási Adatbázis</b> régiók (országok), megyék/ járások/ körzetek, települések és oktatási intézmények szerint listázza a diákszámokat, évről évre 2010 és 2020 között, óvodától a felső tagozat utolsó évfolyamáig (8-ik vagy 9-ik osztály). Kárpátalján óvodai adatok csak 2014-ben és 2018-ban szerepelnek. 2020-as adatok csak Erdélyről vannak. Ellenben Erdélyről hiányzanak a 2010-es óvodai adatsorok és a teljes 2018-as adatok.<br><br>Az oldal tetején található menüben váltogathatunk a különböző megjelenítési formák között. A <b><a href="#" onclick="clicked(0);">Települések</a></b> menüpontban a gyerek- és intézményszámok eloszlásást mutatjuk egy buborék-diagrammon. Ez hasznos áttekintőul szolgál a különböző régiók közötti skálabeli különbségek gyors szemléltetésére. Az <b><a href="#" onclick="clicked(1);">Éves változás</a></b> alatt a gyereklétszámok <b>2010</b> (Erdélyi óvodai adatok esetében 2011) és <b>2019</b> (Kárpátaljai óvodai adatok esetében 2018) közötti <i>változását</i> mutatjuk, 2010-hez viszonyított százalékos értékben. Az <b><a href="#" onclick="clicked(2);">Adatfelfedező</a></b> minialkalmazásban az adatokat <b>Intézményi</b> és <b>Települési</b> szintű lebontásban vizsgálhatjuk, régiókra, minden évre és évfolyamokra lebontva. A <b><a href="#" onclick="clicked(3);">cím</a></b>-re kattintva visszatérhet erre az oldalra.'
-            ]
-
-            var subTitle = ['Gyereklétszámok településenként és oktatási szintenként',
-                'Gyereklétszámok 2010 és 2019 közöti százalékos változása',
-                'Adatfelfedező eszköz',
-                'A külhoni magyar oktatás helyzetének vizuális története 2010 és 2020 között'
-            ]
-
-            var legendTitle = ['Jelmagyarázat',
-                'Jelmagyarázat',
-                'Jelmagyarázat',
-                'Impresszum'
-            ]
-
-            var legendText = ['A buborékok mérete az adott településen nyilvántartott, magyarul tanuló gyerekek vagy intézmények számával arányos. A mérőszám az adot településen feljegyzett óvodás, illetve alsó és felső tagozatos általános iskolás gyerekek összlétszámát (ha több intézmény található egy településen belül, akkor összesítve) jelöli.',
-                'A vizualizációkon a függőleges tengely mindig különböző adat-kategóriákat jelöl (például régiók, megyék vagy évfolyamok). A pontok vízszintes tengely menti elheyezkedése azt mutatja meg, hogy mekkora volt a <i>százalékos változás</i> a 2010 és a 2019-es évek között (Kárpátalja esetében az óvodák legutolsó értékeke 2018-ra, illetve Erdély esetében az óvodák legkorábbi értékeke 2011-re van meg, így ezen értékek alapján számoltuk a változásokat).',
-                'Minden diagrammon a diáklétszámok évek szerinti értékeit mutatjuk, különböző dimenziók szerinti bontásban.',
-                'A kutatást és az adatvizualizáció elkészítését a <b><a href="https://bgazrt.hu/nemzetpolitikai-kutatointezet/" target="_blank">Nemzetpolitikai Kutatóintézet</a></b> a <b>Bethlen Gábor Alapkezelő Zrt.</b> által finanszírozta. Az adatvizualizációt <b><a href="https://data.csaladen.es" target="_blank">Csala Dénes</a></b> készítette.<br><br>Külön köszönet jár <b>Vita Emesé</b>nek, <b>Márton János</b>nak és <b>Csala Dénes</b>nek az erdélyi oktatási adatbázis elkészítésében nyújtott segítségéért, illetve <b>Rákóczi Krisztián</b>nak és <b>Ferenc Viktóriá</b>nak az adatvizualizáció finomításában nyújtott segítségéért.<br><br>Nemzetpolitikai Kutatóintézet &copy; 2021'
-            ]
-
-            // d3.select('.titlebar').style('transform', 'translate(125%, 300%)')
-            // d3.select('#menu').style('transform', 'translate(-25%, 550%)')
-
-            function clicked(e) {
-                console.log(e)
-                d3.select('#topText').html(topText[e])
-                d3.select('#subTitle').html(subTitle[e])
-                d3.select('#legendTitle').html(legendTitle[e])
-                d3.select('#legendText').html(legendText[e])
-                d3.select('#legendAndSearch').style('opacity', ((e == 0) || (e == 1) || (e == 2) || (e == 3)) ? 1 : 0).style('z-index', (e == 0) ? 10 : 5)
-                d3.select('#legendRowWrapper').selectAll('div').style('opacity', (e == 0) ? 1 : 0).style('z-index', (e == 0) ? 10 : 5)
-                d3.select('#searchTitle').style('display', (e == 0) ? 'block' : 'none').style('z-index', (e == 0) ? 10 : 5)
-                d3.select('.form-group').style('display', (e == 0) ? 'block' : 'none').style('z-index', (e == 0) ? 10 : 5)
-                d3.select('#chart').style('opacity', (e == 0) ? 1 : 0).style('z-index', (e == 0) ? 10 : 5)
-                d3.select('#timeline').style('opacity', (e == 1) ? 1 : 0).style('z-index', (e == 1) ? 10 : 5)
-                d3.select('#explorer').style('opacity', (e == 2) ? 1 : 0).style('z-index', (e == 2) ? 10 : 5)
-                d3.select('#school').style('opacity', (e == 3) ? 1 : 0).style('z-index', (e == 2) ? 10 : 5)
-                d3.select('#menu-col').attr('class', ((e == 0) || (e == 3)) ? 'col-sm-4' : 'col-sm-2').style('z-index', (e == 2) ? 10 : 5)
-                d3.select('#legendTitleWrapper').attr('class', ((e == 0) || (e == 3)) ? 'col-sm-6' : 'col-sm-12')
-
-                d3.select('#menu').selectAll('.active2').classed('active2', false)
-                d3.select(d3.select('#menu').selectAll('a').select('span')[0][e]).classed('active2', true)
-
-            }
-
-            function sreload(e) {
-                d3.select('#legendTitle2').selectAll('.active2').classed('active2', false)
-                d3.select(d3.select('#legendTitle2').selectAll('a').select('div')[0][e]).classed('active2', true)
-                d3.select('#chart').selectAll('canvas').remove()
-                d3.select('.combobox-container').remove()
-                reload((e == 0) ? '' : '2')
-            }
-
-
-            var uwidth = 1718; //defined in bubbles.js
-            var uheight = 975;
-
-            var rescale = function() {
-
-                //scale content
-                var container = document.getElementById('cont')
-                console.log(container)
-                var parent = document.body;
-                xuwidth = (window.innerWidth) /
-                    uwidth
-                xuheight = (window.innerHeight) /
-                    uheight
-                console.log(xuwidth, xuheight, parent.offsetHeight)
-                var scal = Math.min(
-                    xuwidth,
-                    xuheight)
-
-                if (scal < 1) {
-
-                    console.log('rendering...scaling', scal)
-                    container.width = uwidth
-                    container.height = uheight
-
-                    container.style.WebkitTransform = "scale(" + scal + ")";
-                    container.style.OTransform = "scale(" + scal + ")";
-                    container.style.MozTransform = "scale(" + scal + ")";
-                    container.style.msTransform = "scale(" + scal + ")";
-                    container.style.Transform = "scale(" + scal + ")";
-
-                    container.style.WebkitTransformOrigin = "0% 0%";
-                    container.style.OTransformOrigin = "0% 0%";
-                    container.style.MozTransformOrigin = "0% 0%";
-                    container.style.msTransformOrigin = "0% 0%";
-                    container.style.TransformOrigin = "0% 0%";
-                } else {
-                    console.log('rendering...no scaling', scal)
-                    container.width = parent.offsetWidth
-                    container.height = parent.offsetHeight
+    </div>
+    <script>
+        /*
+                                                                                                        CryptoJS v3.1.2
+                                                                                                        code.google.com/p/crypto-js
+                                                                                                        (c) 2009-2013 by Jeff Mott. All rights reserved.
+                                                                                                        code.google.com/p/crypto-js/wiki/License
+                                                                                                        */
+        var CryptoJS = CryptoJS || function(u, p) {
+            var d = {},
+                l = d.lib = {},
+                s = function() {},
+                t = l.Base = {
+                    extend: function(a) {
+                        s.prototype = this;
+                        var c = new s;
+                        a && c.mixIn(a);
+                        c.hasOwnProperty("init") || (c.init = function() {
+                            c.$super.init.apply(this, arguments)
+                        });
+                        c.init.prototype = c;
+                        c.$super = this;
+                        return c
+                    },
+                    create: function() {
+                        var a = this.extend();
+                        a.init.apply(a, arguments);
+                        return a
+                    },
+                    init: function() {},
+                    mixIn: function(a) {
+                        for (var c in a) a.hasOwnProperty(c) && (this[c] = a[c]);
+                        a.hasOwnProperty("toString") && (this.toString = a.toString)
+                    },
+                    clone: function() {
+                        return this.init.prototype.extend(this)
+                    }
+                },
+                r = l.WordArray = t.extend({
+                    init: function(a, c) {
+                        a = this.words = a || [];
+                        this.sigBytes = c != p ? c : 4 * a.length
+                    },
+                    toString: function(a) {
+                        return (a || v).stringify(this)
+                    },
+                    concat: function(a) {
+                        var c = this.words,
+                            e = a.words,
+                            j = this.sigBytes;
+                        a = a.sigBytes;
+                        this.clamp();
+                        if (j % 4)
+                            for (var k = 0; k < a; k++) c[j + k >>> 2] |= (e[k >>> 2] >>> 24 - 8 * (k % 4) & 255) << 24 - 8 * ((j + k) % 4);
+                        else if (65535 < e.length)
+                            for (k = 0; k < a; k += 4) c[j + k >>> 2] = e[k >>> 2];
+                        else c.push.apply(c, e);
+                        this.sigBytes += a;
+                        return this
+                    },
+                    clamp: function() {
+                        var a = this.words,
+                            c = this.sigBytes;
+                        a[c >>> 2] &= 4294967295 <<
+                            32 - 8 * (c % 4);
+                        a.length = u.ceil(c / 4)
+                    },
+                    clone: function() {
+                        var a = t.clone.call(this);
+                        a.words = this.words.slice(0);
+                        return a
+                    },
+                    random: function(a) {
+                        for (var c = [], e = 0; e < a; e += 4) c.push(4294967296 * u.random() | 0);
+                        return new r.init(c, a)
+                    }
+                }),
+                w = d.enc = {},
+                v = w.Hex = {
+                    stringify: function(a) {
+                        var c = a.words;
+                        a = a.sigBytes;
+                        for (var e = [], j = 0; j < a; j++) {
+                            var k = c[j >>> 2] >>> 24 - 8 * (j % 4) & 255;
+                            e.push((k >>> 4).toString(16));
+                            e.push((k & 15).toString(16))
+                        }
+                        return e.join("")
+                    },
+                    parse: function(a) {
+                        for (var c = a.length, e = [], j = 0; j < c; j += 2) e[j >>> 3] |= parseInt(a.substr(j,
+                            2), 16) << 24 - 4 * (j % 8);
+                        return new r.init(e, c / 2)
+                    }
+                },
+                b = w.Latin1 = {
+                    stringify: function(a) {
+                        var c = a.words;
+                        a = a.sigBytes;
+                        for (var e = [], j = 0; j < a; j++) e.push(String.fromCharCode(c[j >>> 2] >>> 24 - 8 * (j % 4) & 255));
+                        return e.join("")
+                    },
+                    parse: function(a) {
+                        for (var c = a.length, e = [], j = 0; j < c; j++) e[j >>> 2] |= (a.charCodeAt(j) & 255) << 24 - 8 * (j % 4);
+                        return new r.init(e, c)
+                    }
+                },
+                x = w.Utf8 = {
+                    stringify: function(a) {
+                        try {
+                            return decodeURIComponent(escape(b.stringify(a)))
+                        } catch (c) {
+                            throw Error("Malformed UTF-8 data");
+                        }
+                    },
+                    parse: function(a) {
+                        return b.parse(unescape(encodeURIComponent(a)))
+                    }
+                },
+                q = l.BufferedBlockAlgorithm = t.extend({
+                    reset: function() {
+                        this._data = new r.init;
+                        this._nDataBytes = 0
+                    },
+                    _append: function(a) {
+                        "string" == typeof a && (a = x.parse(a));
+                        this._data.concat(a);
+                        this._nDataBytes += a.sigBytes
+                    },
+                    _process: function(a) {
+                        var c = this._data,
+                            e = c.words,
+                            j = c.sigBytes,
+                            k = this.blockSize,
+                            b = j / (4 * k),
+                            b = a ? u.ceil(b) : u.max((b | 0) - this._minBufferSize, 0);
+                        a = b * k;
+                        j = u.min(4 * a, j);
+                        if (a) {
+                            for (var q = 0; q < a; q += k) this._doProcessBlock(e, q);
+                            q = e.splice(0, a);
+                            c.sigBytes -= j
+                        }
+                        return new r.init(q, j)
+                    },
+                    clone: function() {
+                        var a = t.clone.call(this);
+                        a._data = this._data.clone();
+                        return a
+                    },
+                    _minBufferSize: 0
+                });
+            l.Hasher = q.extend({
+                cfg: t.extend(),
+                init: function(a) {
+                    this.cfg = this.cfg.extend(a);
+                    this.reset()
+                },
+                reset: function() {
+                    q.reset.call(this);
+                    this._doReset()
+                },
+                update: function(a) {
+                    this._append(a);
+                    this._process();
+                    return this
+                },
+                finalize: function(a) {
+                    a && this._append(a);
+                    return this._doFinalize()
+                },
+                blockSize: 16,
+                _createHelper: function(a) {
+                    return function(b, e) {
+                        return (new a.init(e)).finalize(b)
+                    }
+                },
+                _createHmacHelper: function(a) {
+                    return function(b, e) {
+                        return (new n.HMAC.init(a,
+                            e)).finalize(b)
+                    }
                 }
+            });
+            var n = d.algo = {};
+            return d
+        }(Math);
+        (function() {
+            var u = CryptoJS,
+                p = u.lib.WordArray;
+            u.enc.Base64 = {
+                stringify: function(d) {
+                    var l = d.words,
+                        p = d.sigBytes,
+                        t = this._map;
+                    d.clamp();
+                    d = [];
+                    for (var r = 0; r < p; r += 3)
+                        for (var w = (l[r >>> 2] >>> 24 - 8 * (r % 4) & 255) << 16 | (l[r + 1 >>> 2] >>> 24 - 8 * ((r + 1) % 4) & 255) << 8 | l[r + 2 >>> 2] >>> 24 - 8 * ((r + 2) % 4) & 255, v = 0; 4 > v && r + 0.75 * v < p; v++) d.push(t.charAt(w >>> 6 * (3 - v) & 63));
+                    if (l = t.charAt(64))
+                        for (; d.length % 4;) d.push(l);
+                    return d.join("")
+                },
+                parse: function(d) {
+                    var l = d.length,
+                        s = this._map,
+                        t = s.charAt(64);
+                    t && (t = d.indexOf(t), -1 != t && (l = t));
+                    for (var t = [], r = 0, w = 0; w <
+                        l; w++)
+                        if (w % 4) {
+                            var v = s.indexOf(d.charAt(w - 1)) << 2 * (w % 4),
+                                b = s.indexOf(d.charAt(w)) >>> 6 - 2 * (w % 4);
+                            t[r >>> 2] |= (v | b) << 24 - 8 * (r % 4);
+                            r++
+                        }
+                    return p.create(t, r)
+                },
+                _map: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/="
+            }
+        })();
+        (function(u) {
+            function p(b, n, a, c, e, j, k) {
+                b = b + (n & a | ~n & c) + e + k;
+                return (b << j | b >>> 32 - j) + n
+            }
 
+            function d(b, n, a, c, e, j, k) {
+                b = b + (n & c | a & ~c) + e + k;
+                return (b << j | b >>> 32 - j) + n
+            }
+
+            function l(b, n, a, c, e, j, k) {
+                b = b + (n ^ a ^ c) + e + k;
+                return (b << j | b >>> 32 - j) + n
+            }
+
+            function s(b, n, a, c, e, j, k) {
+                b = b + (a ^ (n | ~c)) + e + k;
+                return (b << j | b >>> 32 - j) + n
+            }
+            for (var t = CryptoJS, r = t.lib, w = r.WordArray, v = r.Hasher, r = t.algo, b = [], x = 0; 64 > x; x++) b[x] = 4294967296 * u.abs(u.sin(x + 1)) | 0;
+            r = r.MD5 = v.extend({
+                _doReset: function() {
+                    this._hash = new w.init([1732584193, 4023233417, 2562383102, 271733878])
+                },
+                _doProcessBlock: function(q, n) {
+                    for (var a = 0; 16 > a; a++) {
+                        var c = n + a,
+                            e = q[c];
+                        q[c] = (e << 8 | e >>> 24) & 16711935 | (e << 24 | e >>> 8) & 4278255360
+                    }
+                    var a = this._hash.words,
+                        c = q[n + 0],
+                        e = q[n + 1],
+                        j = q[n + 2],
+                        k = q[n + 3],
+                        z = q[n + 4],
+                        r = q[n + 5],
+                        t = q[n + 6],
+                        w = q[n + 7],
+                        v = q[n + 8],
+                        A = q[n + 9],
+                        B = q[n + 10],
+                        C = q[n + 11],
+                        u = q[n + 12],
+                        D = q[n + 13],
+                        E = q[n + 14],
+                        x = q[n + 15],
+                        f = a[0],
+                        m = a[1],
+                        g = a[2],
+                        h = a[3],
+                        f = p(f, m, g, h, c, 7, b[0]),
+                        h = p(h, f, m, g, e, 12, b[1]),
+                        g = p(g, h, f, m, j, 17, b[2]),
+                        m = p(m, g, h, f, k, 22, b[3]),
+                        f = p(f, m, g, h, z, 7, b[4]),
+                        h = p(h, f, m, g, r, 12, b[5]),
+                        g = p(g, h, f, m, t, 17, b[6]),
+                        m = p(m, g, h, f, w, 22, b[7]),
+                        f = p(f, m, g, h, v, 7, b[8]),
+                        h = p(h, f, m, g, A, 12, b[9]),
+                        g = p(g, h, f, m, B, 17, b[10]),
+                        m = p(m, g, h, f, C, 22, b[11]),
+                        f = p(f, m, g, h, u, 7, b[12]),
+                        h = p(h, f, m, g, D, 12, b[13]),
+                        g = p(g, h, f, m, E, 17, b[14]),
+                        m = p(m, g, h, f, x, 22, b[15]),
+                        f = d(f, m, g, h, e, 5, b[16]),
+                        h = d(h, f, m, g, t, 9, b[17]),
+                        g = d(g, h, f, m, C, 14, b[18]),
+                        m = d(m, g, h, f, c, 20, b[19]),
+                        f = d(f, m, g, h, r, 5, b[20]),
+                        h = d(h, f, m, g, B, 9, b[21]),
+                        g = d(g, h, f, m, x, 14, b[22]),
+                        m = d(m, g, h, f, z, 20, b[23]),
+                        f = d(f, m, g, h, A, 5, b[24]),
+                        h = d(h, f, m, g, E, 9, b[25]),
+                        g = d(g, h, f, m, k, 14, b[26]),
+                        m = d(m, g, h, f, v, 20, b[27]),
+                        f = d(f, m, g, h, D, 5, b[28]),
+                        h = d(h, f,
+                            m, g, j, 9, b[29]),
+                        g = d(g, h, f, m, w, 14, b[30]),
+                        m = d(m, g, h, f, u, 20, b[31]),
+                        f = l(f, m, g, h, r, 4, b[32]),
+                        h = l(h, f, m, g, v, 11, b[33]),
+                        g = l(g, h, f, m, C, 16, b[34]),
+                        m = l(m, g, h, f, E, 23, b[35]),
+                        f = l(f, m, g, h, e, 4, b[36]),
+                        h = l(h, f, m, g, z, 11, b[37]),
+                        g = l(g, h, f, m, w, 16, b[38]),
+                        m = l(m, g, h, f, B, 23, b[39]),
+                        f = l(f, m, g, h, D, 4, b[40]),
+                        h = l(h, f, m, g, c, 11, b[41]),
+                        g = l(g, h, f, m, k, 16, b[42]),
+                        m = l(m, g, h, f, t, 23, b[43]),
+                        f = l(f, m, g, h, A, 4, b[44]),
+                        h = l(h, f, m, g, u, 11, b[45]),
+                        g = l(g, h, f, m, x, 16, b[46]),
+                        m = l(m, g, h, f, j, 23, b[47]),
+                        f = s(f, m, g, h, c, 6, b[48]),
+                        h = s(h, f, m, g, w, 10, b[49]),
+                        g = s(g, h, f, m,
+                            E, 15, b[50]),
+                        m = s(m, g, h, f, r, 21, b[51]),
+                        f = s(f, m, g, h, u, 6, b[52]),
+                        h = s(h, f, m, g, k, 10, b[53]),
+                        g = s(g, h, f, m, B, 15, b[54]),
+                        m = s(m, g, h, f, e, 21, b[55]),
+                        f = s(f, m, g, h, v, 6, b[56]),
+                        h = s(h, f, m, g, x, 10, b[57]),
+                        g = s(g, h, f, m, t, 15, b[58]),
+                        m = s(m, g, h, f, D, 21, b[59]),
+                        f = s(f, m, g, h, z, 6, b[60]),
+                        h = s(h, f, m, g, C, 10, b[61]),
+                        g = s(g, h, f, m, j, 15, b[62]),
+                        m = s(m, g, h, f, A, 21, b[63]);
+                    a[0] = a[0] + f | 0;
+                    a[1] = a[1] + m | 0;
+                    a[2] = a[2] + g | 0;
+                    a[3] = a[3] + h | 0
+                },
+                _doFinalize: function() {
+                    var b = this._data,
+                        n = b.words,
+                        a = 8 * this._nDataBytes,
+                        c = 8 * b.sigBytes;
+                    n[c >>> 5] |= 128 << 24 - c % 32;
+                    var e = u.floor(a /
+                        4294967296);
+                    n[(c + 64 >>> 9 << 4) + 15] = (e << 8 | e >>> 24) & 16711935 | (e << 24 | e >>> 8) & 4278255360;
+                    n[(c + 64 >>> 9 << 4) + 14] = (a << 8 | a >>> 24) & 16711935 | (a << 24 | a >>> 8) & 4278255360;
+                    b.sigBytes = 4 * (n.length + 1);
+                    this._process();
+                    b = this._hash;
+                    n = b.words;
+                    for (a = 0; 4 > a; a++) c = n[a], n[a] = (c << 8 | c >>> 24) & 16711935 | (c << 24 | c >>> 8) & 4278255360;
+                    return b
+                },
+                clone: function() {
+                    var b = v.clone.call(this);
+                    b._hash = this._hash.clone();
+                    return b
+                }
+            });
+            t.MD5 = v._createHelper(r);
+            t.HmacMD5 = v._createHmacHelper(r)
+        })(Math);
+        (function() {
+            var u = CryptoJS,
+                p = u.lib,
+                d = p.Base,
+                l = p.WordArray,
+                p = u.algo,
+                s = p.EvpKDF = d.extend({
+                    cfg: d.extend({
+                        keySize: 4,
+                        hasher: p.MD5,
+                        iterations: 1
+                    }),
+                    init: function(d) {
+                        this.cfg = this.cfg.extend(d)
+                    },
+                    compute: function(d, r) {
+                        for (var p = this.cfg, s = p.hasher.create(), b = l.create(), u = b.words, q = p.keySize, p = p.iterations; u.length < q;) {
+                            n && s.update(n);
+                            var n = s.update(d).finalize(r);
+                            s.reset();
+                            for (var a = 1; a < p; a++) n = s.finalize(n), s.reset();
+                            b.concat(n)
+                        }
+                        b.sigBytes = 4 * q;
+                        return b
+                    }
+                });
+            u.EvpKDF = function(d, l, p) {
+                return s.create(p).compute(d,
+                    l)
+            }
+        })();
+        CryptoJS.lib.Cipher || function(u) {
+            var p = CryptoJS,
+                d = p.lib,
+                l = d.Base,
+                s = d.WordArray,
+                t = d.BufferedBlockAlgorithm,
+                r = p.enc.Base64,
+                w = p.algo.EvpKDF,
+                v = d.Cipher = t.extend({
+                    cfg: l.extend(),
+                    createEncryptor: function(e, a) {
+                        return this.create(this._ENC_XFORM_MODE, e, a)
+                    },
+                    createDecryptor: function(e, a) {
+                        return this.create(this._DEC_XFORM_MODE, e, a)
+                    },
+                    init: function(e, a, b) {
+                        this.cfg = this.cfg.extend(b);
+                        this._xformMode = e;
+                        this._key = a;
+                        this.reset()
+                    },
+                    reset: function() {
+                        t.reset.call(this);
+                        this._doReset()
+                    },
+                    process: function(e) {
+                        this._append(e);
+                        return this._process()
+                    },
+                    finalize: function(e) {
+                        e && this._append(e);
+                        return this._doFinalize()
+                    },
+                    keySize: 4,
+                    ivSize: 4,
+                    _ENC_XFORM_MODE: 1,
+                    _DEC_XFORM_MODE: 2,
+                    _createHelper: function(e) {
+                        return {
+                            encrypt: function(b, k, d) {
+                                return ("string" == typeof k ? c : a).encrypt(e, b, k, d)
+                            },
+                            decrypt: function(b, k, d) {
+                                return ("string" == typeof k ? c : a).decrypt(e, b, k, d)
+                            }
+                        }
+                    }
+                });
+            d.StreamCipher = v.extend({
+                _doFinalize: function() {
+                    return this._process(!0)
+                },
+                blockSize: 1
+            });
+            var b = p.mode = {},
+                x = function(e, a, b) {
+                    var c = this._iv;
+                    c ? this._iv = u : c = this._prevBlock;
+                    for (var d = 0; d < b; d++) e[a + d] ^=
+                        c[d]
+                },
+                q = (d.BlockCipherMode = l.extend({
+                    createEncryptor: function(e, a) {
+                        return this.Encryptor.create(e, a)
+                    },
+                    createDecryptor: function(e, a) {
+                        return this.Decryptor.create(e, a)
+                    },
+                    init: function(e, a) {
+                        this._cipher = e;
+                        this._iv = a
+                    }
+                })).extend();
+            q.Encryptor = q.extend({
+                processBlock: function(e, a) {
+                    var b = this._cipher,
+                        c = b.blockSize;
+                    x.call(this, e, a, c);
+                    b.encryptBlock(e, a);
+                    this._prevBlock = e.slice(a, a + c)
+                }
+            });
+            q.Decryptor = q.extend({
+                processBlock: function(e, a) {
+                    var b = this._cipher,
+                        c = b.blockSize,
+                        d = e.slice(a, a + c);
+                    b.decryptBlock(e, a);
+                    x.call(this,
+                        e, a, c);
+                    this._prevBlock = d
+                }
+            });
+            b = b.CBC = q;
+            q = (p.pad = {}).Pkcs7 = {
+                pad: function(a, b) {
+                    for (var c = 4 * b, c = c - a.sigBytes % c, d = c << 24 | c << 16 | c << 8 | c, l = [], n = 0; n < c; n += 4) l.push(d);
+                    c = s.create(l, c);
+                    a.concat(c)
+                },
+                unpad: function(a) {
+                    a.sigBytes -= a.words[a.sigBytes - 1 >>> 2] & 255
+                }
+            };
+            d.BlockCipher = v.extend({
+                cfg: v.cfg.extend({
+                    mode: b,
+                    padding: q
+                }),
+                reset: function() {
+                    v.reset.call(this);
+                    var a = this.cfg,
+                        b = a.iv,
+                        a = a.mode;
+                    if (this._xformMode == this._ENC_XFORM_MODE) var c = a.createEncryptor;
+                    else c = a.createDecryptor, this._minBufferSize = 1;
+                    this._mode = c.call(a,
+                        this, b && b.words)
+                },
+                _doProcessBlock: function(a, b) {
+                    this._mode.processBlock(a, b)
+                },
+                _doFinalize: function() {
+                    var a = this.cfg.padding;
+                    if (this._xformMode == this._ENC_XFORM_MODE) {
+                        a.pad(this._data, this.blockSize);
+                        var b = this._process(!0)
+                    } else b = this._process(!0), a.unpad(b);
+                    return b
+                },
+                blockSize: 4
+            });
+            var n = d.CipherParams = l.extend({
+                    init: function(a) {
+                        this.mixIn(a)
+                    },
+                    toString: function(a) {
+                        return (a || this.formatter).stringify(this)
+                    }
+                }),
+                b = (p.format = {}).OpenSSL = {
+                    stringify: function(a) {
+                        var b = a.ciphertext;
+                        a = a.salt;
+                        return (a ? s.create([1398893684,
+                            1701076831
+                        ]).concat(a).concat(b) : b).toString(r)
+                    },
+                    parse: function(a) {
+                        a = r.parse(a);
+                        var b = a.words;
+                        if (1398893684 == b[0] && 1701076831 == b[1]) {
+                            var c = s.create(b.slice(2, 4));
+                            b.splice(0, 4);
+                            a.sigBytes -= 16
+                        }
+                        return n.create({
+                            ciphertext: a,
+                            salt: c
+                        })
+                    }
+                },
+                a = d.SerializableCipher = l.extend({
+                    cfg: l.extend({
+                        format: b
+                    }),
+                    encrypt: function(a, b, c, d) {
+                        d = this.cfg.extend(d);
+                        var l = a.createEncryptor(c, d);
+                        b = l.finalize(b);
+                        l = l.cfg;
+                        return n.create({
+                            ciphertext: b,
+                            key: c,
+                            iv: l.iv,
+                            algorithm: a,
+                            mode: l.mode,
+                            padding: l.padding,
+                            blockSize: a.blockSize,
+                            formatter: d.format
+                        })
+                    },
+                    decrypt: function(a, b, c, d) {
+                        d = this.cfg.extend(d);
+                        b = this._parse(b, d.format);
+                        return a.createDecryptor(c, d).finalize(b.ciphertext)
+                    },
+                    _parse: function(a, b) {
+                        return "string" == typeof a ? b.parse(a, this) : a
+                    }
+                }),
+                p = (p.kdf = {}).OpenSSL = {
+                    execute: function(a, b, c, d) {
+                        d || (d = s.random(8));
+                        a = w.create({
+                            keySize: b + c
+                        }).compute(a, d);
+                        c = s.create(a.words.slice(b), 4 * c);
+                        a.sigBytes = 4 * b;
+                        return n.create({
+                            key: a,
+                            iv: c,
+                            salt: d
+                        })
+                    }
+                },
+                c = d.PasswordBasedCipher = a.extend({
+                    cfg: a.cfg.extend({
+                        kdf: p
+                    }),
+                    encrypt: function(b, c, d, l) {
+                        l = this.cfg.extend(l);
+                        d = l.kdf.execute(d,
+                            b.keySize, b.ivSize);
+                        l.iv = d.iv;
+                        b = a.encrypt.call(this, b, c, d.key, l);
+                        b.mixIn(d);
+                        return b
+                    },
+                    decrypt: function(b, c, d, l) {
+                        l = this.cfg.extend(l);
+                        c = this._parse(c, l.format);
+                        d = l.kdf.execute(d, b.keySize, b.ivSize, c.salt);
+                        l.iv = d.iv;
+                        return a.decrypt.call(this, b, c, d.key, l)
+                    }
+                })
+        }();
+        (function() {
+            for (var u = CryptoJS, p = u.lib.BlockCipher, d = u.algo, l = [], s = [], t = [], r = [], w = [], v = [], b = [], x = [], q = [], n = [], a = [], c = 0; 256 > c; c++) a[c] = 128 > c ? c << 1 : c << 1 ^ 283;
+            for (var e = 0, j = 0, c = 0; 256 > c; c++) {
+                var k = j ^ j << 1 ^ j << 2 ^ j << 3 ^ j << 4,
+                    k = k >>> 8 ^ k & 255 ^ 99;
+                l[e] = k;
+                s[k] = e;
+                var z = a[e],
+                    F = a[z],
+                    G = a[F],
+                    y = 257 * a[k] ^ 16843008 * k;
+                t[e] = y << 24 | y >>> 8;
+                r[e] = y << 16 | y >>> 16;
+                w[e] = y << 8 | y >>> 24;
+                v[e] = y;
+                y = 16843009 * G ^ 65537 * F ^ 257 * z ^ 16843008 * e;
+                b[k] = y << 24 | y >>> 8;
+                x[k] = y << 16 | y >>> 16;
+                q[k] = y << 8 | y >>> 24;
+                n[k] = y;
+                e ? (e = z ^ a[a[a[G ^ z]]], j ^= a[a[j]]) : e = j = 1
+            }
+            var H = [0, 1, 2, 4, 8,
+                    16, 32, 64, 128, 27, 54
+                ],
+                d = d.AES = p.extend({
+                    _doReset: function() {
+                        for (var a = this._key, c = a.words, d = a.sigBytes / 4, a = 4 * ((this._nRounds = d + 6) + 1), e = this._keySchedule = [], j = 0; j < a; j++)
+                            if (j < d) e[j] = c[j];
+                            else {
+                                var k = e[j - 1];
+                                j % d ? 6 < d && 4 == j % d && (k = l[k >>> 24] << 24 | l[k >>> 16 & 255] << 16 | l[k >>> 8 & 255] << 8 | l[k & 255]) : (k = k << 8 | k >>> 24, k = l[k >>> 24] << 24 | l[k >>> 16 & 255] << 16 | l[k >>> 8 & 255] << 8 | l[k & 255], k ^= H[j / d | 0] << 24);
+                                e[j] = e[j - d] ^ k
+                            }
+                        c = this._invKeySchedule = [];
+                        for (d = 0; d < a; d++) j = a - d, k = d % 4 ? e[j] : e[j - 4], c[d] = 4 > d || 4 >= j ? k : b[l[k >>> 24]] ^ x[l[k >>> 16 & 255]] ^ q[l[k >>>
+                            8 & 255]] ^ n[l[k & 255]]
+                    },
+                    encryptBlock: function(a, b) {
+                        this._doCryptBlock(a, b, this._keySchedule, t, r, w, v, l)
+                    },
+                    decryptBlock: function(a, c) {
+                        var d = a[c + 1];
+                        a[c + 1] = a[c + 3];
+                        a[c + 3] = d;
+                        this._doCryptBlock(a, c, this._invKeySchedule, b, x, q, n, s);
+                        d = a[c + 1];
+                        a[c + 1] = a[c + 3];
+                        a[c + 3] = d
+                    },
+                    _doCryptBlock: function(a, b, c, d, e, j, l, f) {
+                        for (var m = this._nRounds, g = a[b] ^ c[0], h = a[b + 1] ^ c[1], k = a[b + 2] ^ c[2], n = a[b + 3] ^ c[3], p = 4, r = 1; r < m; r++) var q = d[g >>> 24] ^ e[h >>> 16 & 255] ^ j[k >>> 8 & 255] ^ l[n & 255] ^ c[p++],
+                            s = d[h >>> 24] ^ e[k >>> 16 & 255] ^ j[n >>> 8 & 255] ^ l[g & 255] ^ c[p++],
+                            t =
+                            d[k >>> 24] ^ e[n >>> 16 & 255] ^ j[g >>> 8 & 255] ^ l[h & 255] ^ c[p++],
+                            n = d[n >>> 24] ^ e[g >>> 16 & 255] ^ j[h >>> 8 & 255] ^ l[k & 255] ^ c[p++],
+                            g = q,
+                            h = s,
+                            k = t;
+                        q = (f[g >>> 24] << 24 | f[h >>> 16 & 255] << 16 | f[k >>> 8 & 255] << 8 | f[n & 255]) ^ c[p++];
+                        s = (f[h >>> 24] << 24 | f[k >>> 16 & 255] << 16 | f[n >>> 8 & 255] << 8 | f[g & 255]) ^ c[p++];
+                        t = (f[k >>> 24] << 24 | f[n >>> 16 & 255] << 16 | f[g >>> 8 & 255] << 8 | f[h & 255]) ^ c[p++];
+                        n = (f[n >>> 24] << 24 | f[g >>> 16 & 255] << 16 | f[h >>> 8 & 255] << 8 | f[k & 255]) ^ c[p++];
+                        a[b] = q;
+                        a[b + 1] = s;
+                        a[b + 2] = t;
+                        a[b + 3] = n
+                    },
+                    keySize: 8
+                });
+            u.AES = p._createHelper(d)
+        })();
+    </script>
+    <script>
+        /*
+                                                                                                                                        CryptoJS v3.1.2
+                                                                                                                                        code.google.com/p/crypto-js
+                                                                                                                                        (c) 2009-2013 by Jeff Mott. All rights reserved.
+                                                                                                                                        code.google.com/p/crypto-js/wiki/License
+                                                                                                                                        */
+        var CryptoJS = CryptoJS || function(g, j) {
+            var e = {},
+                d = e.lib = {},
+                m = function() {},
+                n = d.Base = {
+                    extend: function(a) {
+                        m.prototype = this;
+                        var c = new m;
+                        a && c.mixIn(a);
+                        c.hasOwnProperty("init") || (c.init = function() {
+                            c.$super.init.apply(this, arguments)
+                        });
+                        c.init.prototype = c;
+                        c.$super = this;
+                        return c
+                    },
+                    create: function() {
+                        var a = this.extend();
+                        a.init.apply(a, arguments);
+                        return a
+                    },
+                    init: function() {},
+                    mixIn: function(a) {
+                        for (var c in a) a.hasOwnProperty(c) && (this[c] = a[c]);
+                        a.hasOwnProperty("toString") && (this.toString = a.toString)
+                    },
+                    clone: function() {
+                        return this.init.prototype.extend(this)
+                    }
+                },
+                q = d.WordArray = n.extend({
+                    init: function(a, c) {
+                        a = this.words = a || [];
+                        this.sigBytes = c != j ? c : 4 * a.length
+                    },
+                    toString: function(a) {
+                        return (a || l).stringify(this)
+                    },
+                    concat: function(a) {
+                        var c = this.words,
+                            p = a.words,
+                            f = this.sigBytes;
+                        a = a.sigBytes;
+                        this.clamp();
+                        if (f % 4)
+                            for (var b = 0; b < a; b++) c[f + b >>> 2] |= (p[b >>> 2] >>> 24 - 8 * (b % 4) & 255) << 24 - 8 * ((f + b) % 4);
+                        else if (65535 < p.length)
+                            for (b = 0; b < a; b += 4) c[f + b >>> 2] = p[b >>> 2];
+                        else c.push.apply(c, p);
+                        this.sigBytes += a;
+                        return this
+                    },
+                    clamp: function() {
+                        var a = this.words,
+                            c = this.sigBytes;
+                        a[c >>> 2] &= 4294967295 <<
+                            32 - 8 * (c % 4);
+                        a.length = g.ceil(c / 4)
+                    },
+                    clone: function() {
+                        var a = n.clone.call(this);
+                        a.words = this.words.slice(0);
+                        return a
+                    },
+                    random: function(a) {
+                        for (var c = [], b = 0; b < a; b += 4) c.push(4294967296 * g.random() | 0);
+                        return new q.init(c, a)
+                    }
+                }),
+                b = e.enc = {},
+                l = b.Hex = {
+                    stringify: function(a) {
+                        var c = a.words;
+                        a = a.sigBytes;
+                        for (var b = [], f = 0; f < a; f++) {
+                            var d = c[f >>> 2] >>> 24 - 8 * (f % 4) & 255;
+                            b.push((d >>> 4).toString(16));
+                            b.push((d & 15).toString(16))
+                        }
+                        return b.join("")
+                    },
+                    parse: function(a) {
+                        for (var c = a.length, b = [], f = 0; f < c; f += 2) b[f >>> 3] |= parseInt(a.substr(f,
+                            2), 16) << 24 - 4 * (f % 8);
+                        return new q.init(b, c / 2)
+                    }
+                },
+                k = b.Latin1 = {
+                    stringify: function(a) {
+                        var c = a.words;
+                        a = a.sigBytes;
+                        for (var b = [], f = 0; f < a; f++) b.push(String.fromCharCode(c[f >>> 2] >>> 24 - 8 * (f % 4) & 255));
+                        return b.join("")
+                    },
+                    parse: function(a) {
+                        for (var c = a.length, b = [], f = 0; f < c; f++) b[f >>> 2] |= (a.charCodeAt(f) & 255) << 24 - 8 * (f % 4);
+                        return new q.init(b, c)
+                    }
+                },
+                h = b.Utf8 = {
+                    stringify: function(a) {
+                        try {
+                            return decodeURIComponent(escape(k.stringify(a)))
+                        } catch (b) {
+                            throw Error("Malformed UTF-8 data");
+                        }
+                    },
+                    parse: function(a) {
+                        return k.parse(unescape(encodeURIComponent(a)))
+                    }
+                },
+                u = d.BufferedBlockAlgorithm = n.extend({
+                    reset: function() {
+                        this._data = new q.init;
+                        this._nDataBytes = 0
+                    },
+                    _append: function(a) {
+                        "string" == typeof a && (a = h.parse(a));
+                        this._data.concat(a);
+                        this._nDataBytes += a.sigBytes
+                    },
+                    _process: function(a) {
+                        var b = this._data,
+                            d = b.words,
+                            f = b.sigBytes,
+                            l = this.blockSize,
+                            e = f / (4 * l),
+                            e = a ? g.ceil(e) : g.max((e | 0) - this._minBufferSize, 0);
+                        a = e * l;
+                        f = g.min(4 * a, f);
+                        if (a) {
+                            for (var h = 0; h < a; h += l) this._doProcessBlock(d, h);
+                            h = d.splice(0, a);
+                            b.sigBytes -= f
+                        }
+                        return new q.init(h, f)
+                    },
+                    clone: function() {
+                        var a = n.clone.call(this);
+                        a._data = this._data.clone();
+                        return a
+                    },
+                    _minBufferSize: 0
+                });
+            d.Hasher = u.extend({
+                cfg: n.extend(),
+                init: function(a) {
+                    this.cfg = this.cfg.extend(a);
+                    this.reset()
+                },
+                reset: function() {
+                    u.reset.call(this);
+                    this._doReset()
+                },
+                update: function(a) {
+                    this._append(a);
+                    this._process();
+                    return this
+                },
+                finalize: function(a) {
+                    a && this._append(a);
+                    return this._doFinalize()
+                },
+                blockSize: 16,
+                _createHelper: function(a) {
+                    return function(b, d) {
+                        return (new a.init(d)).finalize(b)
+                    }
+                },
+                _createHmacHelper: function(a) {
+                    return function(b, d) {
+                        return (new w.HMAC.init(a,
+                            d)).finalize(b)
+                    }
+                }
+            });
+            var w = e.algo = {};
+            return e
+        }(Math);
+        (function() {
+            var g = CryptoJS,
+                j = g.lib,
+                e = j.WordArray,
+                d = j.Hasher,
+                m = [],
+                j = g.algo.SHA1 = d.extend({
+                    _doReset: function() {
+                        this._hash = new e.init([1732584193, 4023233417, 2562383102, 271733878, 3285377520])
+                    },
+                    _doProcessBlock: function(d, e) {
+                        for (var b = this._hash.words, l = b[0], k = b[1], h = b[2], g = b[3], j = b[4], a = 0; 80 > a; a++) {
+                            if (16 > a) m[a] = d[e + a] | 0;
+                            else {
+                                var c = m[a - 3] ^ m[a - 8] ^ m[a - 14] ^ m[a - 16];
+                                m[a] = c << 1 | c >>> 31
+                            }
+                            c = (l << 5 | l >>> 27) + j + m[a];
+                            c = 20 > a ? c + ((k & h | ~k & g) + 1518500249) : 40 > a ? c + ((k ^ h ^ g) + 1859775393) : 60 > a ? c + ((k & h | k & g | h & g) - 1894007588) : c + ((k ^ h ^
+                                g) - 899497514);
+                            j = g;
+                            g = h;
+                            h = k << 30 | k >>> 2;
+                            k = l;
+                            l = c
+                        }
+                        b[0] = b[0] + l | 0;
+                        b[1] = b[1] + k | 0;
+                        b[2] = b[2] + h | 0;
+                        b[3] = b[3] + g | 0;
+                        b[4] = b[4] + j | 0
+                    },
+                    _doFinalize: function() {
+                        var d = this._data,
+                            e = d.words,
+                            b = 8 * this._nDataBytes,
+                            l = 8 * d.sigBytes;
+                        e[l >>> 5] |= 128 << 24 - l % 32;
+                        e[(l + 64 >>> 9 << 4) + 14] = Math.floor(b / 4294967296);
+                        e[(l + 64 >>> 9 << 4) + 15] = b;
+                        d.sigBytes = 4 * e.length;
+                        this._process();
+                        return this._hash
+                    },
+                    clone: function() {
+                        var e = d.clone.call(this);
+                        e._hash = this._hash.clone();
+                        return e
+                    }
+                });
+            g.SHA1 = d._createHelper(j);
+            g.HmacSHA1 = d._createHmacHelper(j)
+        })();
+        (function() {
+            var g = CryptoJS,
+                j = g.enc.Utf8;
+            g.algo.HMAC = g.lib.Base.extend({
+                init: function(e, d) {
+                    e = this._hasher = new e.init;
+                    "string" == typeof d && (d = j.parse(d));
+                    var g = e.blockSize,
+                        n = 4 * g;
+                    d.sigBytes > n && (d = e.finalize(d));
+                    d.clamp();
+                    for (var q = this._oKey = d.clone(), b = this._iKey = d.clone(), l = q.words, k = b.words, h = 0; h < g; h++) l[h] ^= 1549556828, k[h] ^= 909522486;
+                    q.sigBytes = b.sigBytes = n;
+                    this.reset()
+                },
+                reset: function() {
+                    var e = this._hasher;
+                    e.reset();
+                    e.update(this._iKey)
+                },
+                update: function(e) {
+                    this._hasher.update(e);
+                    return this
+                },
+                finalize: function(e) {
+                    var d =
+                        this._hasher;
+                    e = d.finalize(e);
+                    d.reset();
+                    return d.finalize(this._oKey.clone().concat(e))
+                }
+            })
+        })();
+        (function() {
+            var g = CryptoJS,
+                j = g.lib,
+                e = j.Base,
+                d = j.WordArray,
+                j = g.algo,
+                m = j.HMAC,
+                n = j.PBKDF2 = e.extend({
+                    cfg: e.extend({
+                        keySize: 4,
+                        hasher: j.SHA1,
+                        iterations: 1
+                    }),
+                    init: function(d) {
+                        this.cfg = this.cfg.extend(d)
+                    },
+                    compute: function(e, b) {
+                        for (var g = this.cfg, k = m.create(g.hasher, e), h = d.create(), j = d.create([1]), n = h.words, a = j.words, c = g.keySize, g = g.iterations; n.length < c;) {
+                            var p = k.update(b).finalize(j);
+                            k.reset();
+                            for (var f = p.words, v = f.length, s = p, t = 1; t < g; t++) {
+                                s = k.finalize(s);
+                                k.reset();
+                                for (var x = s.words, r = 0; r < v; r++) f[r] ^= x[r]
+                            }
+                            h.concat(p);
+                            a[0]++
+                        }
+                        h.sigBytes = 4 * c;
+                        return h
+                    }
+                });
+            g.PBKDF2 = function(d, b, e) {
+                return n.create(e).compute(d, b)
+            }
+        })();
+    </script>
+    <script>
+        /*! srcdoc-polyfill - v0.1.1 - 2013-03-01
+         * http://github.com/jugglinmike/srcdoc-polyfill/
+         * Copyright (c) 2013 Mike Pennisi; Licensed MIT */
+        (function(window, document, undefined) {
+
+            var idx, iframes;
+            var _srcDoc = window.srcDoc;
+            var isCompliant = !!("srcdoc" in document.createElement("iframe"));
+            var implementations = {
+                compliant: function(iframe, content) {
+
+                    if (content) {
+                        iframe.setAttribute("srcdoc", content);
+                    }
+                },
+                legacy: function(iframe, content) {
+
+                    var jsUrl;
+
+                    if (!iframe || !iframe.getAttribute) {
+                        return;
+                    }
+
+                    if (!content) {
+                        content = iframe.getAttribute("srcdoc");
+                    } else {
+                        iframe.setAttribute("srcdoc", content);
+                    }
+
+                    if (content) {
+                        // The value returned by a script-targeted URL will be used as
+                        // the iFrame's content. Create such a URL which returns the
+                        // iFrame element's `srcdoc` attribute.
+                        jsUrl = "javascript: window.frameElement.getAttribute('srcdoc');";
+
+                        iframe.setAttribute("src", jsUrl);
+
+                        // Explicitly set the iFrame's window.location for
+                        // compatability with IE9, which does not react to changes in
+                        // the `src` attribute when it is a `javascript:` URL, for
+                        // some reason
+                        if (iframe.contentWindow) {
+                            iframe.contentWindow.location = jsUrl;
+                        }
+                    }
+                }
+            };
+            var srcDoc = window.srcDoc = {
+                // Assume the best
+                set: implementations.compliant,
+                noConflict: function() {
+                    window.srcDoc = _srcDoc;
+                    return srcDoc;
+                }
             };
 
-            //init view scaling
-            rescale();
+            // If the browser supports srcdoc, no shimming is necessary
+            if (isCompliant) {
+                return;
+            }
 
-            //init data load
-            reload('')
-            clicked(3);
-        </script>
+            srcDoc.set = implementations.legacy;
+
+            // Automatically shim any iframes already present in the document
+            iframes = document.getElementsByTagName("iframe");
+            idx = iframes.length;
+
+            while (idx--) {
+                srcDoc.set(iframes[idx]);
+            }
+
+        }(this, this.document));
+    </script>
+    <script>
+        var pl = {
+            "salt": "j+yKIQ086a2pqJ5WgEyySXPe9rTckTBew4Yq2dmt6Y0=",
+            "iv": "3VPpjmf8tsa+zAYI5zQyfA==",
+            "data": "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"
+        };
+
+        var submitPass = document.getElementById('submitPass');
+        var passEl = document.getElementById('pass');
+        var invalidPassEl = document.getElementById('invalidPass');
+        var successEl = document.getElementById('success');
+        var contentFrame = document.getElementById('contentFrame');
+
+        if (pl === "") {
+            submitPass.disabled = true;
+            passEl.disabled = true;
+            alert("This page is meant to be used with the encryption tool. It doesn't work standalone.");
+        }
+
+        function doSubmit(evt) {
+            try {
+                var decrypted = decryptFile(CryptoJS.enc.Base64.parse(pl.data), passEl.value, CryptoJS.enc.Base64.parse(pl.salt), CryptoJS.enc.Base64.parse(pl.iv));
+                if (decrypted === "") throw "No data returned";
+
+                // Set default iframe link targets to _top so all links break out of the iframe
+                decrypted = decrypted.replace("<head>", "<head><base href=\".\" target=\"_top\">");
+
+                srcDoc.set(contentFrame, decrypted);
+
+                successEl.style.display = "inline";
+                passEl.disabled = true;
+                submitPass.disabled = true;
+                setTimeout(function() {
+                    dialogWrap.style.display = "none";
+                }, 1000);
+            } catch (e) {
+                invalidPassEl.style.display = "inline";
+                passEl.value = "";
+            }
+        }
+
+        submitPass.onclick = doSubmit;
+        passEl.onkeypress = function(e) {
+            if (!e) e = window.event;
+            var keyCode = e.keyCode || e.which;
+            invalidPassEl.style.display = "none";
+            if (keyCode == '13') {
+                // Enter pressed
+                doSubmit();
+                return false;
+            }
+        }
+
+        function decryptFile(contents, password, salt, iv) {
+            var _cp = CryptoJS.lib.CipherParams.create({
+                ciphertext: contents
+            });
+            var key = CryptoJS.PBKDF2(password, salt, {
+                keySize: 256 / 32,
+                iterations: 100
+            });
+            var decrypted = CryptoJS.AES.decrypt(_cp, key, {
+                iv: iv
+            });
+
+            return decrypted.toString(CryptoJS.enc.Utf8);
+        }
+    </script>
 </body>
 
 </html>
